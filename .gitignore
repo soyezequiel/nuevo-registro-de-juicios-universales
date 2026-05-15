@@ -1,0 +1,35 @@
+# [BUSCAR] .gitignore estándar para .NET. Sale del template oficial de GitHub
+# (github.com/github/gitignore/blob/main/VisualStudio.gitignore), recortado a
+# lo que aplica a este proyecto. Si más adelante aparecen carpetas raras
+# generadas por el IDE, se suman acá.
+
+# Build output de .NET
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Cache de Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+
+# Logs y crash dumps
+*.log
+*.tmp
+
+# User-specific de Visual Studio
+*.suo
+*.user
+*.userprefs
+
+# Tailwind y otros binarios standalone — viven en tools/ pero no se versionan
+tools/*.exe
+
+# CSS compilado por Tailwind (se genera en cada build, no versionar)
+src/Sucesiones.Web/wwwroot/css/salida.css
+
+# Publish output
+publish/
+*.nupkg
