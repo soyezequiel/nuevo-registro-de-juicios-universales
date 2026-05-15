@@ -1,52 +1,52 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+@*
+    [TEMPLATE/EDITADO] Este archivo vino del template `dotnet new razor` con
+    Bootstrap + jQuery + navbar default. Lo reescribí entero para Tailwind y
+    paleta azul/negro. Lo que queda es:
+    - Estructura HTML [BASE].
+    - Tag helpers asp-* [BASE] (sintaxis Razor estándar).
+    - Clases Tailwind [BASE] (si sabés Tailwind).
+    - Path "_framework/blazor.server.js" [BUSCAR] — lo sirve MapBlazorHub() en Program.cs.
+    - asp-append-version [BUSCAR] — agrega ?v=hash al link para bustear cache cuando cambia el archivo.
+*@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Sucesiones.Web</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Sucesiones.Web.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Sucesiones</title>
+    @* [BUSCAR] asp-append-version le agrega un hash al final del href para
+       que el browser invalide cache cuando el CSS cambia. *@
+    <link rel="stylesheet" href="~/css/salida.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Sucesiones.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<body class="min-h-screen bg-neutral-50 text-marca-negro antialiased">
+    <header class="bg-marca-negro text-white shadow">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            @* [BASE] asp-area / asp-page son tag helpers de Razor Pages para generar URLs. *@
+            <a class="flex items-center gap-3 text-lg font-semibold tracking-tight" asp-area="" asp-page="/Index">
+                <span class="inline-block h-3 w-3 rounded-full bg-marca-azulClaro"></span>
+                Sucesiones — Registro de Juicios Universales
+            </a>
+            <nav class="flex items-center gap-6 text-sm">
+                <a class="text-neutral-300 hover:text-white" asp-area="" asp-page="/Index">Inicio</a>
+                <a class="text-neutral-300 hover:text-white" asp-area="" asp-page="/Privacy">Privacidad</a>
+            </nav>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Sucesiones.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    @* [BASE] RenderBody() inyecta el contenido de la página actual. *@
+    <main class="mx-auto max-w-6xl px-6 py-10">
+        @RenderBody()
+    </main>
+
+    <footer class="mt-16 border-t border-neutral-200 bg-white">
+        <div class="mx-auto max-w-6xl px-6 py-4 text-xs text-neutral-500">
+            &copy; 2026 — Proyecto de rediseño RJU. No afiliado oficialmente a SCBA.
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    @* [BUSCAR] Este script lo sirve automáticamente MapBlazorHub() en Program.cs.
+       No existe como archivo físico en wwwroot — es un endpoint del framework. *@
+    <script src="_framework/blazor.server.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

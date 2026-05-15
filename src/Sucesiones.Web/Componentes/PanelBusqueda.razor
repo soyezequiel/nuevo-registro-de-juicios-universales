@@ -1,0 +1,109 @@
+@*
+    Panel de búsqueda — UI estática, sin lógica.
+
+    Tags de aprendizaje para este archivo:
+    - Estructura del componente (.razor con HTML + bloque @code) → [BASE]
+    - HTML y form semánticos → [BASE]
+    - Clases Tailwind (grid, gap, rounded-lg, focus:ring, etc.) → [BASE] si sabés Tailwind
+    - Clases marca-* → [BUSCAR] vienen del theme.extend.colors de tailwind.config.js
+    - Tipos de consulta del <select> → [BUSCAR] vienen del handoff SCBA (dropAplicaciones)
+
+    La lógica de búsqueda llega en slice 2. Los campos del formulario están
+    hardcodeados a Sucesiones para mostrar el layout; el formulario dinámico
+    también es slice 2.
+*@
+
+<section class="panel-busqueda mx-auto max-w-5xl rounded-lg bg-white shadow-lg ring-1 ring-marca-azul/10">
+    <header class="border-b border-marca-azul/10 px-6 py-4">
+        <h2 class="text-xl font-semibold text-marca-negro">Consulta de juicios universales</h2>
+        <p class="mt-1 text-sm text-neutral-600">Buscar por apellido, nombre, número de oficio u otros criterios.</p>
+    </header>
+
+    <div class="grid gap-6 px-6 py-6 md:grid-cols-[200px,1fr]">
+        <div>
+            <label class="block text-sm font-medium text-marca-negro" for="dropAplicaciones">Tipo de consulta</label>
+            <select id="dropAplicaciones"
+                    class="mt-2 block w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-marca-negro shadow-sm focus:border-marca-azulClaro focus:outline-none focus:ring-1 focus:ring-marca-azulClaro"
+                    disabled>
+                <option value="1">Sucesiones</option>
+                <option value="2">Fichas Sucesiones</option>
+                <option value="8">CC Sucesiones</option>
+                <option value="11">Quiebras</option>
+                <option value="12">Fichas Quiebras</option>
+                <option value="15">CC Quiebras</option>
+            </select>
+            <p class="mt-2 text-xs text-neutral-500">Placeholder. La lógica llega en el slice 2.</p>
+        </div>
+
+        <form class="grid gap-4 md:grid-cols-2" onsubmit="return false;">
+            <div>
+                <label class="block text-sm font-medium text-marca-negro" for="campoAño">Año</label>
+                <input id="campoAño" type="text" placeholder="2024" disabled
+                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-marca-negro" for="campoNumOficio">Num Oficio</label>
+                <input id="campoNumOficio" type="text" placeholder="12345" disabled
+                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-marca-negro" for="campoApellido">Apellido</label>
+                <input id="campoApellido" type="text" placeholder="Pérez" disabled
+                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-marca-negro" for="campoNombre">Nombre</label>
+                <input id="campoNombre" type="text" placeholder="Juan" disabled
+                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div class="md:col-span-2 flex justify-end gap-2 pt-2">
+                <button type="button" disabled
+                        class="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-60">
+                    Limpiar
+                </button>
+                <button type="submit" disabled
+                        class="rounded-md bg-marca-azul px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-marca-azulClaro disabled:cursor-not-allowed disabled:opacity-60">
+                    Buscar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tabla-resultados border-t border-marca-azul/10 px-6 py-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Resultados</h3>
+            <span class="text-xs text-neutral-400">0 registros</span>
+        </div>
+        <div class="mt-3 overflow-x-auto rounded-md border border-neutral-200">
+            <table class="min-w-full divide-y divide-neutral-200 text-sm">
+                <thead class="bg-neutral-50">
+                    <tr>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">#</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Año</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Oficio</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Apellido y nombre</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Juzgado</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Acción</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 bg-white">
+                    <tr>
+                        <td colspan="6" class="px-3 py-12 text-center text-neutral-400">
+                            Sin búsquedas todavía. Completá los campos y presioná <span class="font-medium">Buscar</span>.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        @* Estados visuales previstos para slice 2 — quedan documentados acá, no renderizan. *@
+        @* - cargando:    spinner + "Buscando..." *@
+        @* - vacio:       "No se encontraron resultados con esos criterios." *@
+        @* - error:       caja roja con mensaje técnico claro *@
+        @* - demasiados:  caja amarilla "Demasiados resultados, refiná la búsqueda." *@
+    </div>
+</section>
+
+@code {
+    // La lógica de búsqueda, el form dinámico y los estados llegan en slice 2.
+}

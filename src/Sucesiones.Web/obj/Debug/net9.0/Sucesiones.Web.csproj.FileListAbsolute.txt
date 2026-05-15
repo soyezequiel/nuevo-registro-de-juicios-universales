@@ -96,3 +96,6 @@ F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.web\obj\Debug\
 F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.web\obj\Debug\net9.0\Sucesiones.Web.pdb
 F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.web\obj\Debug\net9.0\Sucesiones.Web.genruntimeconfig.cache
 F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.web\obj\Debug\net9.0\ref\Sucesiones.Web.dll
+F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.Web\obj\Debug\net9.0\compressed\15bu39c4om-{0}-ofkv4yell3-ofkv4yell3.gz
+F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.Web\obj\Debug\net9.0\compressed\bbisyhmja1-{0}-xgkbs3foka-xgkbs3foka.gz
+F:\proyectos\nuevo registro de juicios universales\src\Sucesiones.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

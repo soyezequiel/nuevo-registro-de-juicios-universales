@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\proyectos\\nuevo registro de juicios universales\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Sucesiones.Web\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Sucesiones.Web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\Sucesiones.Web\\Sucesiones.Web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\proyectos\\nuevo registro de juicios universales\\tools\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tools\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PanelBusqueda.razor",
+              "DocumentMoniker": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor",
+              "RelativeDocumentMoniker": "src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor",
+              "ToolTip": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor",
+              "RelativeToolTip": "src\\Sucesiones.Web\\Componentes\\PanelBusqueda.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T01:51:44.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Sucesiones.Web\\Program.cs",
+              "ToolTip": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Program.cs",
+              "RelativeToolTip": "src\\Sucesiones.Web\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T01:49:29.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Sucesiones.Web.csproj",
+              "DocumentMoniker": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Sucesiones.Web.csproj",
+              "RelativeDocumentMoniker": "src\\Sucesiones.Web\\Sucesiones.Web.csproj",
+              "ToolTip": "F:\\proyectos\\nuevo registro de juicios universales\\src\\Sucesiones.Web\\Sucesiones.Web.csproj",
+              "RelativeToolTip": "src\\Sucesiones.Web\\Sucesiones.Web.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-15T01:48:43.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "README.md",
+              "DocumentMoniker": "F:\\proyectos\\nuevo registro de juicios universales\\tools\\README.md",
+              "RelativeDocumentMoniker": "tools\\README.md",
+              "ToolTip": "F:\\proyectos\\nuevo registro de juicios universales\\tools\\README.md",
+              "RelativeToolTip": "tools\\README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-14T20:18:50.808Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

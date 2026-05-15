@@ -1,10 +1,29 @@
-﻿@page
+@*
+    [BASE] @page, @model, @{} y ViewData son sintaxis Razor estándar.
+    [BUSCAR] El tag helper <component> de abajo y la propiedad render-mode.
+*@
+
+@page
+@using Sucesiones.Web.Componentes
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@* [BASE] Hero y descripción, clases Tailwind. *@
+<section class="mb-8">
+    <h1 class="text-3xl font-bold tracking-tight text-marca-negro">Buscar en el Registro de Juicios Universales</h1>
+    <p class="mt-2 max-w-2xl text-neutral-600">
+        Interfaz pública en construcción. Esta pantalla consulta el sistema oficial de SCBA a través de un backend adaptador. Slice 1: esqueleto visual sin lógica.
+    </p>
+</section>
+
+@*
+    [BUSCAR] <component> es un tag helper de ASP.NET Core para embeber un
+    componente Blazor dentro de una Razor Page (técnica "isla").
+    - type="typeof(...)" toma el tipo C# del componente.
+    - render-mode="ServerPrerendered" pinta HTML en el server primero (SEO/perf)
+      y después conecta el circuit SignalR para que sea interactivo.
+      Otras opciones: Static, Server, WebAssembly, WebAssemblyPrerendered.
+*@
+<component type="typeof(PanelBusqueda)" render-mode="ServerPrerendered" />
