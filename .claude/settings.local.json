@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(git branch *)",
-      "Bash(git filter-branch *)"
+      "Bash(git filter-branch *)",
+      "Bash(./tools/tailwindcss.exe -i src/Sucesiones.Web/wwwroot/css/entrada.css -o src/Sucesiones.Web/wwwroot/css/salida.css --minify)"
     ]
   }
 }

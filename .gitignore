@@ -10,10 +10,15 @@ obj/
 *.exe
 *.pdb
 
-# Cache de Visual Studio / Rider / VS Code
+# Cache de Visual Studio / Rider
 .vs/
-.vscode/
 .idea/
+
+# VS Code: ignoramos todo .vscode/ excepto launch.json y tasks.json,
+# que sirven para que cualquier dev levante el debugger con F5 sin configurar nada.
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 
 # Logs y crash dumps
 *.log

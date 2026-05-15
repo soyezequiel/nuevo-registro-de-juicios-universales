@@ -1,0 +1,52 @@
+{
+    // [BUSCAR] tasks.json define tareas que VS Code puede correr.
+    // El debugger llama a la tarea "build" antes de arrancar (ver preLaunchTask en launch.json).
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Sucesiones.Web/Sucesiones.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/Sucesiones.Web/Sucesiones.Web.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            // [BUSCAR] Tailwind en modo watch — útil correrlo aparte mientras desarrollás
+            // para tener feedback instantáneo en el browser sin esperar a dotnet build.
+            "label": "tailwind:watch",
+            "command": "${workspaceFolder}/tools/tailwindcss.exe",
+            "type": "process",
+            "args": [
+                "-i",
+                "${workspaceFolder}/src/Sucesiones.Web/wwwroot/css/entrada.css",
+                "-o",
+                "${workspaceFolder}/src/Sucesiones.Web/wwwroot/css/salida.css",
+                "--watch"
+            ],
+            "isBackground": true,
+            "problemMatcher": []
+        }
+    ]
+}
