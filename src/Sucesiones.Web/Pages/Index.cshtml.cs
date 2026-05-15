@@ -5,11 +5,11 @@ namespace Sucesiones.Web.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILogger<IndexModel> _registroEventos;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(ILogger<IndexModel> registroEventos)
     {
-        _logger = logger;
+        _registroEventos = registroEventos;
     }
 
     public void OnGet()

@@ -5,18 +5,18 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <TailwindBin>$(MSBuildThisFileDirectory)..\..\tools\tailwindcss.exe</TailwindBin>
-    <TailwindInput>$(MSBuildThisFileDirectory)wwwroot\css\entrada.css</TailwindInput>
-    <TailwindOutput>$(MSBuildThisFileDirectory)wwwroot\css\salida.css</TailwindOutput>
+    <TailwindBinario>$(MSBuildThisFileDirectory)..\..\tools\tailwindcss.exe</TailwindBinario>
+    <TailwindEntrada>$(MSBuildThisFileDirectory)wwwroot\css\entrada.css</TailwindEntrada>
+    <TailwindSalida>$(MSBuildThisFileDirectory)wwwroot\css\salida.css</TailwindSalida>
   </PropertyGroup>
 
   <Target Name="TailwindBuild" BeforeTargets="Build">
     <Error
-      Condition="!Exists('$(TailwindBin)')"
-      Text="Falta $(TailwindBin). Bajar el binario standalone de Tailwind — instrucciones en tools/README.md." />
-    <Message Importance="high" Text="Compilando Tailwind: $(TailwindInput) -> $(TailwindOutput)" />
+      Condition="!Exists('$(TailwindBinario)')"
+      Text="Falta $(TailwindBinario). Bajar el binario standalone de Tailwind — instrucciones en tools/README.md." />
+    <Message Importance="high" Text="Compilando Tailwind: $(TailwindEntrada) -> $(TailwindSalida)" />
     <!-- Los paths van entre &quot; porque la ruta del repo tiene espacios; sin comillas el shell rompe argumentos. -->
-    <Exec Command="&quot;$(TailwindBin)&quot; -i &quot;$(TailwindInput)&quot; -o &quot;$(TailwindOutput)&quot; --minify" />
+    <Exec Command="&quot;$(TailwindBinario)&quot; -i &quot;$(TailwindEntrada)&quot; -o &quot;$(TailwindSalida)&quot; --minify" />
   </Target>
 
 </Project>

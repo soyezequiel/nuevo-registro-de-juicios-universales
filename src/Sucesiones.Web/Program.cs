@@ -1,23 +1,23 @@
-var builder = WebApplication.CreateBuilder(args);
+var creadorApp = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+creadorApp.Services.AddRazorPages();
+creadorApp.Services.AddServerSideBlazor();
 
-var app = builder.Build();
+var aplicacion = creadorApp.Build();
 
-if (!app.Environment.IsDevelopment())
+if (!aplicacion.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    aplicacion.UseExceptionHandler("/Error");
+    aplicacion.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthorization();
+aplicacion.UseHttpsRedirection();
+aplicacion.UseRouting();
+aplicacion.UseAuthorization();
 
-app.MapStaticAssets();
-app.MapRazorPages()
+aplicacion.MapStaticAssets();
+aplicacion.MapRazorPages()
    .WithStaticAssets();
-app.MapBlazorHub();
+aplicacion.MapBlazorHub();
 
-app.Run();
+aplicacion.Run();
