@@ -1,38 +1,21 @@
-<!-- [TEMPLATE] Todo este archivo lo generó `dotnet new razor -n Sucesiones.Web ...`,
-     excepto el bloque de Tailwind de abajo (PropertyGroup con Tailwind* y Target). -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <!-- [TEMPLATE] -->
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <!-- [BUSCAR] Variables MSBuild. $(MSBuildThisFileDirectory) es built-in y vale
-         "la carpeta donde está este csproj".
-         [ESTILO] Las extraigo a propiedades para no repetir paths abajo.
-         Nota: en Tailwind v4 ya no hay tailwind.config.js — la config vive en CSS
-         dentro de entrada.css (@import, @source, @theme). -->
     <TailwindBin>$(MSBuildThisFileDirectory)..\..\tools\tailwindcss.exe</TailwindBin>
     <TailwindInput>$(MSBuildThisFileDirectory)wwwroot\css\entrada.css</TailwindInput>
     <TailwindOutput>$(MSBuildThisFileDirectory)wwwroot\css\salida.css</TailwindOutput>
   </PropertyGroup>
 
-  <!-- [BUSCAR] Target = paso con nombre dentro del pipeline de MSBuild.
-       BeforeTargets="Build" hace que corra antes del target estándar Build. -->
   <Target Name="TailwindBuild" BeforeTargets="Build">
-    <!-- [BUSCAR] <Error Condition="..."> es la forma idiomática de fallar el build
-         con un mensaje propio. La función Exists() viene de MSBuild. -->
     <Error
       Condition="!Exists('$(TailwindBin)')"
       Text="Falta $(TailwindBin). Bajar el binario standalone de Tailwind — instrucciones en tools/README.md." />
-
-    <!-- [BUSCAR] Importance="high" hace que el mensaje aparezca aunque no uses verbose. -->
     <Message Importance="high" Text="Compilando Tailwind: $(TailwindInput) -> $(TailwindOutput)" />
-
-    <!-- [BUSCAR] <Exec> corre un comando de shell. Si devuelve != 0, aborta el build.
-         &quot; es el escape XML de comilla doble — necesario porque los paths pueden
-         tener espacios. Sin las comillas, el comando se rompe en el primer espacio. -->
+    <!-- Los paths van entre &quot; porque la ruta del repo tiene espacios; sin comillas el shell rompe argumentos. -->
     <Exec Command="&quot;$(TailwindBin)&quot; -i &quot;$(TailwindInput)&quot; -o &quot;$(TailwindOutput)&quot; --minify" />
   </Target>
 

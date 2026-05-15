@@ -1,6 +1,4 @@
 {
-    // [BUSCAR] tasks.json define tareas que VS Code puede correr.
-    // El debugger llama a la tarea "build" antes de arrancar (ver preLaunchTask en launch.json).
     "version": "2.0.0",
     "tasks": [
         {
@@ -33,8 +31,6 @@
             "group": "build"
         },
         {
-            // [BUSCAR] Tailwind en modo watch — útil correrlo aparte mientras desarrollás
-            // para tener feedback instantáneo en el browser sin esperar a dotnet build.
             "label": "tailwind:watch",
             "command": "${workspaceFolder}/tools/tailwindcss.exe",
             "type": "process",

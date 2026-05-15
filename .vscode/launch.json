@@ -1,6 +1,4 @@
 {
-    // [BUSCAR] Esquema oficial de VS Code para configurar el debugger.
-    // El tipo "coreclr" es el debugger de .NET. preLaunchTask referencia tasks.json.
     "version": "0.2.0",
     "configurations": [
         {
@@ -8,19 +6,12 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            // [BUSCAR] ${workspaceFolder} es una variable de VS Code que apunta a la raíz del repo.
-            // El path al .dll lo conoce el debugger porque sale de la propiedad
-            // TargetPath del .csproj — net9.0 es el TargetFramework.
             "program": "${workspaceFolder}/src/Sucesiones.Web/bin/Debug/net9.0/Sucesiones.Web.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Sucesiones.Web",
             "stopAtEntry": false,
-            // [BUSCAR] launchSettingsProfile elige uno de los perfiles de Properties/launchSettings.json.
-            // "https" expone http://localhost:5118 y https://localhost:7206.
             "launchSettingsProfile": "https",
             "serverReadyAction": {
-                // Cuando ASP.NET Core imprime "Now listening on: http(s)://..." en la consola,
-                // VS Code lo detecta con este regex y abre el browser.
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
@@ -50,8 +41,6 @@
             }
         },
         {
-            // [BUSCAR] "attach" sirve para enganchar el debugger a un proceso que ya está corriendo.
-            // Útil si arrancaste el server con `dotnet run` aparte y querés debuguearlo sin reiniciarlo.
             "name": "Attach to Sucesiones.Web",
             "type": "coreclr",
             "request": "attach"

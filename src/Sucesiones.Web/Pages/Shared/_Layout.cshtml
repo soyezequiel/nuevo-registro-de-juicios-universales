@@ -1,27 +1,14 @@
-@*
-    [TEMPLATE/EDITADO] Este archivo vino del template `dotnet new razor` con
-    Bootstrap + jQuery + navbar default. Lo reescribí entero para Tailwind y
-    paleta azul/negro. Lo que queda es:
-    - Estructura HTML [BASE].
-    - Tag helpers asp-* [BASE] (sintaxis Razor estándar).
-    - Clases Tailwind [BASE] (si sabés Tailwind).
-    - Path "_framework/blazor.server.js" [BUSCAR] — lo sirve MapBlazorHub() en Program.cs.
-    - asp-append-version [BUSCAR] — agrega ?v=hash al link para bustear cache cuando cambia el archivo.
-*@
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sucesiones</title>
-    @* [BUSCAR] asp-append-version le agrega un hash al final del href para
-       que el browser invalide cache cuando el CSS cambia. *@
     <link rel="stylesheet" href="~/css/salida.css" asp-append-version="true" />
 </head>
 <body class="min-h-screen bg-neutral-50 text-marca-negro antialiased">
     <header class="bg-marca-negro text-white shadow">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-            @* [BASE] asp-area / asp-page son tag helpers de Razor Pages para generar URLs. *@
             <a class="flex items-center gap-3 text-lg font-semibold tracking-tight" asp-area="" asp-page="/Index">
                 <span class="inline-block h-3 w-3 rounded-full bg-marca-azul-claro"></span>
                 Sucesiones — Registro de Juicios Universales
@@ -33,7 +20,6 @@
         </div>
     </header>
 
-    @* [BASE] RenderBody() inyecta el contenido de la página actual. *@
     <main class="mx-auto max-w-6xl px-6 py-10">
         @RenderBody()
     </main>
@@ -44,8 +30,6 @@
         </div>
     </footer>
 
-    @* [BUSCAR] Este script lo sirve automáticamente MapBlazorHub() en Program.cs.
-       No existe como archivo físico en wwwroot — es un endpoint del framework. *@
     <script src="_framework/blazor.server.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

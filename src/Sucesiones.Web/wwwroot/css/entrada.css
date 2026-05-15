@@ -1,13 +1,4 @@
-/*
-  [BUSCAR] Tailwind v4 — sintaxis "CSS-first config".
-  Lo que en v3 iba en tailwind.config.js (colors, content, theme) ahora vive
-  acá en CSS.
-  - @import "tailwindcss" reemplaza los 3 @tailwind base/components/utilities.
-  - @source declara qué archivos escanear para detectar clases usadas.
-    Paths relativos a este archivo.
-  - @theme define custom properties que Tailwind expone como utilities
-    (p.ej. --color-marca-azul -> bg-marca-azul, text-marca-azul, etc.).
-*/
+/* Tailwind v4 (CSS-first config). En v3 esto era @tailwind base/components/utilities + tailwind.config.js. */
 
 @import "tailwindcss";
 

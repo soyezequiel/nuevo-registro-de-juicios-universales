@@ -31,12 +31,7 @@ Una rebanada vertical es una funcionalidad end-to-end mínima que el usuario pue
 - No agregar dependencias sin justificar y obtener OK.
 - No refactorear código existente salvo que se pida explícitamente.
 - No "limpiar" código del usuario sin permiso.
-- Sin comentarios redundantes. Solo el "porqué" no obvio.
-- **Comentarios de aprendizaje**: en este proyecto los archivos con contenido técnico llevan tags al inicio o al lado de cada bloque, para que el usuario sepa qué se espera que sepa de memoria y qué no. Aplicar a todo código nuevo.
-  - `[BASE]` — se sabe de aprender el stack (Razor, C#, .NET, Tailwind, Blazor). Si leíste el tutorial oficial, lo conocés.
-  - `[BUSCAR]` — receta específica que no se recuerda de memoria. Se googlea "cómo hago X en Y", se encuentra el snippet, se adapta.
-  - `[TEMPLATE]` — lo generó un comando (`dotnet new ...`, `dotnet add ...`). Lo podés leer y entender, pero no lo escribiste.
-  - `[ESTILO]` — decisión opcional de organización. El código funcionaría igual sin esto. Es prolijidad.
+- Sin comentarios redundantes. Solo el "porqué" no obvio (un gotcha real, una restricción oculta, algo que sorprendería al que lee). Nada de etiquetar lo obvio ni de explicar cosas googleables.
 - Sin error handling defensivo para escenarios imposibles. Validar en bordes (input de usuario, APIs externas).
 - Nada de half-finished: si algo no se termina, decirlo en el walkthrough.
 

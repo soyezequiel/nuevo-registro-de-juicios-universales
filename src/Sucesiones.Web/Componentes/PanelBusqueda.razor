@@ -1,18 +1,3 @@
-@*
-    Panel de búsqueda — UI estática, sin lógica.
-
-    Tags de aprendizaje para este archivo:
-    - Estructura del componente (.razor con HTML + bloque @code) → [BASE]
-    - HTML y form semánticos → [BASE]
-    - Clases Tailwind (grid, gap, rounded-lg, focus:ring, etc.) → [BASE] si sabés Tailwind
-    - Clases marca-* → [BUSCAR] vienen del theme.extend.colors de tailwind.config.js
-    - Tipos de consulta del <select> → [BUSCAR] vienen del handoff SCBA (dropAplicaciones)
-
-    La lógica de búsqueda llega en slice 2. Los campos del formulario están
-    hardcodeados a Sucesiones para mostrar el layout; el formulario dinámico
-    también es slice 2.
-*@
-
 <section class="panel-busqueda mx-auto max-w-5xl rounded-lg bg-white shadow-lg ring-1 ring-marca-azul/10">
     <header class="border-b border-marca-azul/10 px-6 py-4">
         <h2 class="text-xl font-semibold text-marca-negro">Consulta de juicios universales</h2>
@@ -96,14 +81,9 @@
             </table>
         </div>
 
-        @* Estados visuales previstos para slice 2 — quedan documentados acá, no renderizan. *@
-        @* - cargando:    spinner + "Buscando..." *@
-        @* - vacio:       "No se encontraron resultados con esos criterios." *@
-        @* - error:       caja roja con mensaje técnico claro *@
-        @* - demasiados:  caja amarilla "Demasiados resultados, refiná la búsqueda." *@
+        @* TODO slice 2: estados cargando / vacio / error / demasiados. *@
     </div>
 </section>
 
 @code {
-    // La lógica de búsqueda, el form dinámico y los estados llegan en slice 2.
 }

@@ -1,8 +1,3 @@
-# [BUSCAR] .gitignore estándar para .NET. Sale del template oficial de GitHub
-# (github.com/github/gitignore/blob/main/VisualStudio.gitignore), recortado a
-# lo que aplica a este proyecto. Si más adelante aparecen carpetas raras
-# generadas por el IDE, se suman acá.
-
 # Build output de .NET
 bin/
 obj/
@@ -14,8 +9,7 @@ obj/
 .vs/
 .idea/
 
-# VS Code: ignoramos todo .vscode/ excepto launch.json y tasks.json,
-# que sirven para que cualquier dev levante el debugger con F5 sin configurar nada.
+# VS Code: solo versionamos launch.json y tasks.json.
 .vscode/*
 !.vscode/launch.json
 !.vscode/tasks.json
@@ -29,10 +23,8 @@ obj/
 *.user
 *.userprefs
 
-# Tailwind y otros binarios standalone — viven en tools/ pero no se versionan
+# Binarios standalone y CSS generado por Tailwind
 tools/*.exe
-
-# CSS compilado por Tailwind (se genera en cada build, no versionar)
 src/Sucesiones.Web/wwwroot/css/salida.css
 
 # Publish output
