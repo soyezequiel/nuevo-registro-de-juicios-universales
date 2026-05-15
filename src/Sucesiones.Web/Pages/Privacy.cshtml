@@ -1,8 +1,22 @@
-﻿@page
+@*
+    [TEMPLATE/EDITADO] Página de privacidad — el template `dotnet new razor` la
+    incluye y `_Layout` la linkea desde el header. La dejé con contenido mínimo
+    en español y clases Tailwind. Contenido real, slice futuro.
+*@
+@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Privacidad";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="mx-auto max-w-3xl">
+    <h1 class="text-3xl font-bold tracking-tight text-marca-negro">@ViewData["Title"]</h1>
+    <p class="mt-4 text-neutral-600">
+        Esta es una interfaz pública en construcción para consultar el Registro de Juicios Universales de SCBA.
+        No se almacenan datos personales ni se utilizan cookies de seguimiento.
+    </p>
+    <p class="mt-2 text-neutral-600">
+        Las búsquedas se procesan en el servidor y se reenvían al sistema oficial. El texto completo de esta política se
+        completa en un slice futuro.
+    </p>
+</section>
