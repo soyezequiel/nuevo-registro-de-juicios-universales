@@ -1,7 +1,7 @@
 # Plan del proyecto — Sucesiones (rediseño RJU)
 
 > Documento vivo. Se actualiza al cerrar cada rebanada o al cambiar una decisión.
-> Última actualización: 2026-05-14.
+> Última actualización: 2026-05-16.
 
 ## Contexto
 
@@ -66,7 +66,7 @@ Máximo **~10–15 archivos por iteración**. Si una rebanada se pasa, se corta 
 
 ## Roadmap de rebanadas
 
-### Slice 1 — Esqueleto + home estática *(en curso)*
+### Slice 1 — Esqueleto + home estática *(cerrada 2026-05-16)*
 
 Una app Razor Pages que arranca, con Blazor Server habilitado y Tailwind compilando. La home muestra título, dropdown placeholder, formulario placeholder, tabla vacía y los estados visuales (sin lógica de búsqueda real).
 
@@ -93,9 +93,25 @@ Una app Razor Pages que arranca, con Blazor Server habilitado y Tailwind compila
 - Formulario dinámico según dropdown — estará hardcodeado a Sucesiones.
 - Tabla con datos — estará vacía/placeholder.
 
-### Slice 2 — Formulario dinámico + mock en memoria
+### Slice 2 — Formulario dinámico + mock en memoria *(plan acordado, pendiente de implementar)*
 
 Los campos del formulario cambian según el tipo seleccionado en el dropdown (Sucesiones, Quiebras, etc.), usando la tabla de campos del handoff. Botón "Buscar" devuelve resultados hardcodeados desde una clase fake. Estados visuales reales: idle, cargando, resultados, sin resultados, error.
+
+**Plan acordado (chat anterior), ~6 archivos:**
+
+| # | Archivo | Qué |
+|---|---|---|
+| 1 | `Modelos/TiposConsulta.cs` (nuevo) | Los 6 tipos del dropdown + qué campos tiene cada uno (datos del handoff) |
+| 2 | `Modelos/ResultadoSucesion.cs` (nuevo) | DTO de una fila de resultado (año, oficio, apellido, juzgado…) |
+| 3 | `Modelos/EstadoBusqueda.cs` (nuevo) | Enum: `Inicial`, `Cargando`, `ConResultados`, `SinResultados`, `Error` |
+| 4 | `Servicios/BuscadorFake.cs` (nuevo) | Devuelve resultados hardcodeados con un delay simulado |
+| 5 | `Program.cs` (edit) | Registrar `BuscadorFake` en el DI |
+| 6 | `Componentes/PanelBusqueda.razor` (reescribir `@code` + bindings) | Dropdown cambia campos; "Buscar" llama al fake; render según estado |
+
+**Decisiones acordadas:**
+- Sin interfaz `IClienteRju` todavía — la abstracción del adapter es slice 3 (no abstracción prematura).
+- Delay simulado (`Task.Delay(800)`) para que el estado `Cargando` sea visible. Fake honesto, explícito en el código.
+- Solo Sucesiones y Quiebras devuelven resultados fake; los otros tipos arman el form pero el fake devuelve `SinResultados` (no inventar datos de tipos no investigados).
 
 ### Slice 3 — Adapter como class library + tests unitarios
 
@@ -132,6 +148,10 @@ Detectar el mensaje de demasiados resultados y mostrar un estado visual claro pi
 | Sin React | El proyecto es Razor por requisito. React se practica en otro proyecto. |
 | Adapter en proyecto separado (slice 3+) | Permite tests unitarios sin levantar la web. Es la forma canónica .NET de aislar dependencias. |
 | Nombres en español | Proyecto de aprendizaje — bajar fricción de lectura. Solo afecta lo que escribimos nosotros. |
+| Tailwind v4 (no v3) | El binario standalone más nuevo es v4. Config CSS-first con `@import`/`@source`/`@theme` en `entrada.css`; sin `tailwind.config.js`. |
+| Versionar `.vscode/launch.json` y `tasks.json` | F5 levanta el debugger sin configurar en cualquier máquina. El resto de `.vscode/` se ignora. |
+| `docs/flujo-y-glosario.md` | Material de aprendizaje del flujo .NET/Blazor (analogía de restaurante + glosario). No es contrato del proyecto. |
+| Sin comentarios de aprendizaje en código | Se probó con tags `[BASE]/[BUSCAR]/...` y generaban ruido. Código auto-descriptivo en español; comentario solo para gotchas reales. |
 
 ## Riesgos abiertos (del handoff)
 
