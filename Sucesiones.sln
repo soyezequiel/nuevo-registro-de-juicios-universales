@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sucesiones.web", "Sucesione
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucesiones.Web", "src\Sucesiones.web\Sucesiones.Web.csproj", "{B779EE9C-5452-40F0-92E0-D94DAD7732A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucesiones.Adapter", "src\Sucesiones.Adapter\Sucesiones.Adapter.csproj", "{FB813A87-DDD0-40D2-A531-6E714AE8BA10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,18 @@ Global
 		{B779EE9C-5452-40F0-92E0-D94DAD7732A6}.Release|x64.Build.0 = Release|Any CPU
 		{B779EE9C-5452-40F0-92E0-D94DAD7732A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{B779EE9C-5452-40F0-92E0-D94DAD7732A6}.Release|x86.Build.0 = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|x64.Build.0 = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +52,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{74F082D5-00BE-998C-C1FE-7E33E0E6703E} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{B779EE9C-5452-40F0-92E0-D94DAD7732A6} = {74F082D5-00BE-998C-C1FE-7E33E0E6703E}
+		{FB813A87-DDD0-40D2-A531-6E714AE8BA10} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
