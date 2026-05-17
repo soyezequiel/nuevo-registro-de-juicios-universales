@@ -1,10 +1,10 @@
-using Sucesiones.Web.Modelos;
+using Sucesiones.Adapter.Modelos;
 
-namespace Sucesiones.Web.Servicios;
+namespace Sucesiones.Adapter;
 
-// Datos ficticios y delay simulado. El adapter real contra SCBA llega en slice 4
-// y será el que use los criterios tipeados; este fake los ignora a propósito.
-public class BuscadorFake
+// Datos ficticios y delay simulado. El adapter real (ClienteRjuHttp) llega en
+// slice 4 y será el que use los criterios; este fake los ignora a propósito.
+public class ClienteRjuFake : IClienteRju
 {
     private static readonly IReadOnlyList<ResultadoSucesion> Resultados =
     [
@@ -13,9 +13,9 @@ public class BuscadorFake
         new ResultadoSucesion(2, "2017", "30551", "Gómez", "Ana Lucía", "27.456.789", "30/06/2016", "Select$2"),
     ];
 
-    public async Task<IReadOnlyList<ResultadoSucesion>> BuscarAsync()
+    public async Task<ResultadoBusqueda> BuscarAsync(IReadOnlyDictionary<string, string> criterios)
     {
         await Task.Delay(800);
-        return Resultados;
+        return new ResultadoBusqueda(EstadoConsulta.ConResultados, Resultados);
     }
 }

@@ -1,4 +1,4 @@
-@inject BuscadorFake Buscador
+@inject IClienteRju Rju
 
 <section class="panel-busqueda mx-auto max-w-5xl rounded-lg bg-white shadow-lg ring-1 ring-marca-azul/10">
     <header class="border-b border-marca-azul/10 px-6 py-4">
@@ -136,7 +136,14 @@
         estado = EstadoBusqueda.Cargando;
         resultados = Array.Empty<ResultadoSucesion>();
 
-        resultados = await Buscador.BuscarAsync();
-        estado = resultados.Count > 0 ? EstadoBusqueda.ConResultados : EstadoBusqueda.SinResultados;
+        var respuesta = await Rju.BuscarAsync(valores);
+        resultados = respuesta.Filas;
+        estado = respuesta.Estado switch
+        {
+            EstadoConsulta.ConResultados => EstadoBusqueda.ConResultados,
+            EstadoConsulta.SinResultados => EstadoBusqueda.SinResultados,
+            // DemasiadosResultados tiene su propia pantalla en slice 6; por ahora cae en Error.
+            _ => EstadoBusqueda.Error,
+        };
     }
 }

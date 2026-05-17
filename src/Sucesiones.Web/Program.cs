@@ -1,10 +1,10 @@
-using Sucesiones.Web.Servicios;
+using Sucesiones.Adapter;
 
 var creadorApp = WebApplication.CreateBuilder(args);
 
 creadorApp.Services.AddRazorPages();
 creadorApp.Services.AddServerSideBlazor();
-creadorApp.Services.AddScoped<BuscadorFake>();
+creadorApp.Services.AddScoped<IClienteRju, ClienteRjuFake>();
 
 var aplicacion = creadorApp.Build();
 

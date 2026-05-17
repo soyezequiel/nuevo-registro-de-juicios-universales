@@ -1,0 +1,1 @@
+173|updatePanel|UpdatePanel1|<!-- FIXTURE SINTETICO: construido del formato documentado en el handoff, NO es captura real de SCBA. Capturas reales = slice 4. --><div class="mensaje">Sin resultados</div>|38|hiddenField|__VIEWSTATE|/wEPDwUKMTIzNDU2Nzg5MGRkFAKE_VS_SINRES|8|hiddenField|__VIEWSTATEGENERATOR|CA0B0334|

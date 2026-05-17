@@ -1,4 +1,4 @@
-namespace Sucesiones.Web.Modelos;
+namespace Sucesiones.Adapter.Modelos;
 
 public record ResultadoSucesion(
     int Indice,
