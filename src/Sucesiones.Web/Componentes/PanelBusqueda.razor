@@ -1,54 +1,32 @@
+@inject BuscadorFake Buscador
+
 <section class="panel-busqueda mx-auto max-w-5xl rounded-lg bg-white shadow-lg ring-1 ring-marca-azul/10">
     <header class="border-b border-marca-azul/10 px-6 py-4">
-        <h2 class="text-xl font-semibold text-marca-negro">Consulta de juicios universales</h2>
+        <h2 class="text-xl font-semibold text-marca-negro">Consulta de sucesiones</h2>
         <p class="mt-1 text-sm text-neutral-600">Buscar por apellido, nombre, número de oficio u otros criterios.</p>
     </header>
 
-    <div class="grid gap-6 px-6 py-6 md:grid-cols-[200px,1fr]">
-        <div>
-            <label class="block text-sm font-medium text-marca-negro" for="dropAplicaciones">Tipo de consulta</label>
-            <select id="dropAplicaciones"
-                    class="mt-2 block w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-marca-negro shadow-sm focus:border-marca-azul-claro focus:outline-none focus:ring-1 focus:ring-marca-azul-claro"
-                    disabled>
-                <option value="1">Sucesiones</option>
-                <option value="2">Fichas Sucesiones</option>
-                <option value="8">CC Sucesiones</option>
-                <option value="11">Quiebras</option>
-                <option value="12">Fichas Quiebras</option>
-                <option value="15">CC Quiebras</option>
-            </select>
-            <p class="mt-2 text-xs text-neutral-500">Placeholder. La lógica llega en el slice 2.</p>
-        </div>
-
-        <form class="grid gap-4 md:grid-cols-2" onsubmit="return false;">
-            <div>
-                <label class="block text-sm font-medium text-marca-negro" for="campoAño">Año</label>
-                <input id="campoAño" type="text" placeholder="2024" disabled
-                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-marca-negro" for="campoNumOficio">Num Oficio</label>
-                <input id="campoNumOficio" type="text" placeholder="12345" disabled
-                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-marca-negro" for="campoApellido">Apellido</label>
-                <input id="campoApellido" type="text" placeholder="Pérez" disabled
-                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-marca-negro" for="campoNombre">Nombre</label>
-                <input id="campoNombre" type="text" placeholder="Juan" disabled
-                       class="mt-2 block w-full rounded-md border border-neutral-300 bg-neutral-50 px-3 py-2 text-sm shadow-sm" />
-            </div>
+    <div class="px-6 py-6">
+        <form class="grid gap-4 md:grid-cols-2" @onsubmit="Buscar">
+            @foreach (var campo in CamposSucesiones.Todos)
+            {
+                <div>
+                    <label class="block text-sm font-medium text-marca-negro" for="campo-@campo.Nombre">@campo.Etiqueta</label>
+                    <input id="campo-@campo.Nombre" type="text"
+                           @bind="valores[campo.Nombre]"
+                           class="mt-2 block w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-marca-negro shadow-sm focus:border-marca-azul-claro focus:outline-none focus:ring-1 focus:ring-marca-azul-claro" />
+                </div>
+            }
             <div class="md:col-span-2 flex justify-end gap-2 pt-2">
-                <button type="button" disabled
-                        class="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-60">
+                <button type="button" @onclick="Limpiar"
+                        class="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled="@(estado == EstadoBusqueda.Cargando)">
                     Limpiar
                 </button>
-                <button type="submit" disabled
-                        class="rounded-md bg-marca-azul px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-marca-azul-claro disabled:cursor-not-allowed disabled:opacity-60">
-                    Buscar
+                <button type="submit"
+                        class="rounded-md bg-marca-azul px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-marca-azul-claro disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled="@(estado == EstadoBusqueda.Cargando)">
+                    @(estado == EstadoBusqueda.Cargando ? "Buscando…" : "Buscar")
                 </button>
             </div>
         </form>
@@ -57,7 +35,7 @@
     <div class="tabla-resultados border-t border-marca-azul/10 px-6 py-4">
         <div class="flex items-center justify-between">
             <h3 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Resultados</h3>
-            <span class="text-xs text-neutral-400">0 registros</span>
+            <span class="text-xs text-neutral-400">@resultados.Count registros</span>
         </div>
         <div class="mt-3 overflow-x-auto rounded-md border border-neutral-200">
             <table class="min-w-full divide-y divide-neutral-200 text-sm">
@@ -66,24 +44,99 @@
                         <th class="px-3 py-2 text-left font-medium text-neutral-600">#</th>
                         <th class="px-3 py-2 text-left font-medium text-neutral-600">Año</th>
                         <th class="px-3 py-2 text-left font-medium text-neutral-600">Oficio</th>
-                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Apellido y nombre</th>
-                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Juzgado</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Apellido</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Nombre</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Documento</th>
+                        <th class="px-3 py-2 text-left font-medium text-neutral-600">Fallecimiento</th>
                         <th class="px-3 py-2 text-left font-medium text-neutral-600">Acción</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-200 bg-white">
-                    <tr>
-                        <td colspan="6" class="px-3 py-12 text-center text-neutral-400">
-                            Sin búsquedas todavía. Completá los campos y presioná <span class="font-medium">Buscar</span>.
-                        </td>
-                    </tr>
+                    @switch (estado)
+                    {
+                        case EstadoBusqueda.Inicial:
+                            <tr>
+                                <td colspan="8" class="px-3 py-12 text-center text-neutral-400">
+                                    Sin búsquedas todavía. Completá los campos y presioná <span class="font-medium">Buscar</span>.
+                                </td>
+                            </tr>
+                            break;
+
+                        case EstadoBusqueda.Cargando:
+                            <tr>
+                                <td colspan="8" class="px-3 py-12 text-center text-neutral-500">
+                                    Buscando en el registro…
+                                </td>
+                            </tr>
+                            break;
+
+                        case EstadoBusqueda.SinResultados:
+                            <tr>
+                                <td colspan="8" class="px-3 py-12 text-center text-neutral-500">
+                                    No se encontraron resultados para los criterios ingresados.
+                                </td>
+                            </tr>
+                            break;
+
+                        case EstadoBusqueda.Error:
+                            <tr>
+                                <td colspan="8" class="px-3 py-12 text-center text-red-600">
+                                    Ocurrió un error al consultar el registro. Volvé a intentar.
+                                </td>
+                            </tr>
+                            break;
+
+                        case EstadoBusqueda.ConResultados:
+                            @foreach (var fila in resultados)
+                            {
+                                <tr>
+                                    <td class="px-3 py-2 text-neutral-500">@(fila.Indice + 1)</td>
+                                    <td class="px-3 py-2 text-marca-negro">@fila.Anio</td>
+                                    <td class="px-3 py-2 text-marca-negro">@fila.NumOficio</td>
+                                    <td class="px-3 py-2 text-marca-negro">@fila.Apellido</td>
+                                    <td class="px-3 py-2 text-marca-negro">@fila.Nombre</td>
+                                    <td class="px-3 py-2 text-marca-negro">@fila.NumDocumento</td>
+                                    <td class="px-3 py-2 text-marca-negro">@(string.IsNullOrEmpty(fila.Fallecimiento) ? "—" : fila.Fallecimiento)</td>
+                                    <td class="px-3 py-2">
+                                        <button type="button" disabled
+                                                title="Ver oficio: disponible en una próxima etapa"
+                                                class="rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-600 shadow-sm disabled:cursor-not-allowed disabled:opacity-60">
+                                            Ver
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                            break;
+                    }
                 </tbody>
             </table>
         </div>
-
-        @* TODO slice 2: estados cargando / vacio / error / demasiados. *@
     </div>
 </section>
 
 @code {
+    private Dictionary<string, string> valores = new();
+    private EstadoBusqueda estado = EstadoBusqueda.Inicial;
+    private IReadOnlyList<ResultadoSucesion> resultados = Array.Empty<ResultadoSucesion>();
+
+    protected override void OnInitialized() => CargarCampos();
+
+    private void CargarCampos() =>
+        valores = CamposSucesiones.Todos.ToDictionary(c => c.Nombre, _ => string.Empty);
+
+    private void Limpiar()
+    {
+        CargarCampos();
+        estado = EstadoBusqueda.Inicial;
+        resultados = Array.Empty<ResultadoSucesion>();
+    }
+
+    private async Task Buscar()
+    {
+        estado = EstadoBusqueda.Cargando;
+        resultados = Array.Empty<ResultadoSucesion>();
+
+        resultados = await Buscador.BuscarAsync();
+        estado = resultados.Count > 0 ? EstadoBusqueda.ConResultados : EstadoBusqueda.SinResultados;
+    }
 }

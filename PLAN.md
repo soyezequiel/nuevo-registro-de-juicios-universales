@@ -93,9 +93,13 @@ Una app Razor Pages que arranca, con Blazor Server habilitado y Tailwind compila
 - Formulario dinámico según dropdown — estará hardcodeado a Sucesiones.
 - Tabla con datos — estará vacía/placeholder.
 
-### Slice 2 — Formulario dinámico + mock en memoria *(plan acordado, pendiente de implementar)*
+### Slice 2 — Formulario de Sucesiones + mock en memoria *(en implementación)*
 
-Los campos del formulario cambian según el tipo seleccionado en el dropdown (Sucesiones, Quiebras, etc.), usando la tabla de campos del handoff. Botón "Buscar" devuelve resultados hardcodeados desde una clase fake. Estados visuales reales: idle, cargando, resultados, sin resultados, error.
+> **Cambio de alcance (2026-05-17):** el MVP cubre **solo Sucesiones**. El
+> formulario dinámico multi-tipo (Quiebras, CC, Fichas) queda como **deuda
+> fuera del MVP**. Se sacó el dropdown y el código se acotó a Sucesiones.
+
+Formulario fijo de Sucesiones (8 campos del handoff). Botón "Buscar" devuelve resultados hardcodeados desde una clase fake. Estados visuales reales: idle, cargando, resultados, sin resultados, error.
 
 **Plan acordado (chat anterior), ~6 archivos:**
 
@@ -152,6 +156,7 @@ Detectar el mensaje de demasiados resultados y mostrar un estado visual claro pi
 | Versionar `.vscode/launch.json` y `tasks.json` | F5 levanta el debugger sin configurar en cualquier máquina. El resto de `.vscode/` se ignora. |
 | `docs/flujo-y-glosario.md` | Material de aprendizaje del flujo .NET/Blazor (analogía de restaurante + glosario). No es contrato del proyecto. |
 | Sin comentarios de aprendizaje en código | Se probó con tags `[BASE]/[BUSCAR]/...` y generaban ruido. Código auto-descriptivo en español; comentario solo para gotchas reales. |
+| MVP solo Sucesiones (2026-05-17) | Acotar el alcance: el resto de los tipos de consulta del handoff (Quiebras, CC, Fichas) es deuda fuera del MVP. Se eliminó el dropdown y el código se redujo a Sucesiones. |
 
 ## Riesgos abiertos (del handoff)
 

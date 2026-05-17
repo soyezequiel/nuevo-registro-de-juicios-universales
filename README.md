@@ -29,7 +29,15 @@ dotnet run --project src/Sucesiones.Web
 
 ## Desarrollo
 
-Durante desarrollo activo conviene correr Tailwind en `--watch` en otra terminal para no esperar al rebuild de MSBuild:
+Para no tener que reiniciar el server con cada cambio, usar `dotnet watch` en vez de `dotnet run`. Vigila los archivos y aplica Hot Reload al guardar:
+
+```powershell
+dotnet watch --project src/Sucesiones.Web
+```
+
+Algunas ediciones estructurales del `@code` (cambiar firmas, agregar/quitar campos) son *rude edits*: Hot Reload no puede parchearlas y `dotnet watch` reinicia la app solo. Es esperado.
+
+Durante desarrollo activo conviene además correr Tailwind en `--watch` en otra terminal para no esperar al rebuild de MSBuild:
 
 ```powershell
 .\tools\tailwindcss.exe -i src\Sucesiones.Web\wwwroot\css\entrada.css -o src\Sucesiones.Web\wwwroot\css\salida.css --watch
