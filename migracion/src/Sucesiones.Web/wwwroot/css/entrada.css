@@ -9,17 +9,13 @@
    para no romper nada y migrar gradualmente.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Las fuentes van PRIMERO: un @import debe preceder a toda otra regla
-   (salvo @charset/@layer). Tailwind expande `@import "tailwindcss"` en
-   reglas reales, así que si este url() va después, Lightning CSS lo
-   descarta y las fuentes nunca cargan. */
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700;8..60,900&family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap");
-
 @import "tailwindcss";
 
 @source "../../Pages/**/*.cshtml";
 @source "../../Componentes/**/*.razor";
 @source "../../**/*.razor";
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700;8..60,900&family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap");
 
 @theme {
   /* ── Familias ─────────────────────────────────────────────────────────── */
