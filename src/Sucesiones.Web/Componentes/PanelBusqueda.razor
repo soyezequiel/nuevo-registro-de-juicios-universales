@@ -21,23 +21,23 @@
 <section class="panel-busqueda">
 
     @* ── Formulario ───────────────────────────────────────────────────────── *@
-    <section class="card-rju p-9 mt-7">
-        <div class="flex items-baseline justify-between mb-5 pb-4 border-b border-regla-fina">
+    <section class="card-rju p-5 sm:p-7 lg:p-9 mt-6 sm:mt-7">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between mb-5 pb-4 border-b border-regla-fina">
             <div>
                 <div class="eyebrow eyebrow--accent">Formulario</div>
                 <h2 class="mt-1 font-display text-[24px] font-semibold text-tinta m-0">Criterios de la consulta</h2>
             </div>
-            <div class="text-[13px] text-tinta-tenue italic">
+            <div class="text-[13px] text-tinta-tenue italic sm:text-right">
                 Todos los campos son opcionales — al menos uno es requerido.
             </div>
         </div>
 
         <form @onsubmit="Buscar" @onsubmit:preventDefault="true">
             @* Campos principales: 4 columnas con spans 1 / 2 *@
-            <div class="grid grid-cols-4 gap-x-6 gap-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-5">
                 @foreach (var campo in CamposPrincipales)
                 {
-                    <div class="@(campo.Span == 2 ? "col-span-2" : "col-span-1")">
+                    <div class="@(campo.Span == 2 ? "col-span-1 sm:col-span-2 lg:col-span-2" : "col-span-1")">
                         <label class="label-caja" for="@($"campo-{campo.Nombre}")">@campo.Etiqueta</label>
                         <input id="@($"campo-{campo.Nombre}")" type="text"
                                class="input-caja"
@@ -50,13 +50,13 @@
 
             @* Variantes — sub-sección con borde tenue arriba *@
             <div class="mt-6 pt-5 border-t border-regla-fina">
-                <div class="flex items-baseline gap-3 mb-3">
+                <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3 mb-3">
                     <div class="eyebrow">Variantes</div>
                     <span class="text-[12.5px] italic text-tinta-tenue">
                         Para captar grafías alternativas del causante.
                     </span>
                 </div>
-                <div class="grid grid-cols-2 gap-x-6 gap-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                     @foreach (var campo in CamposVariantes)
                     {
                         <div>
@@ -71,9 +71,9 @@
             </div>
 
             @* Acciones *@
-            <div class="mt-6 pt-5 border-t border-regla-fina flex justify-end items-center gap-3">
+            <div class="mt-6 pt-5 border-t border-regla-fina flex flex-col-reverse sm:flex-row sm:justify-end sm:items-center gap-3">
                 <button type="button" @onclick="Limpiar"
-                        class="btn-ghost"
+                        class="btn-ghost w-full sm:w-auto justify-center"
                         disabled="@(estado == EstadoBusqueda.Cargando)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                         <path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 9 8 9"/>
@@ -81,7 +81,7 @@
                     Limpiar formulario
                 </button>
                 <button type="submit"
-                        class="btn-primario"
+                        class="btn-primario w-full sm:w-auto justify-center"
                         disabled="@(estado == EstadoBusqueda.Cargando)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                         <circle cx="11" cy="11" r="6"/><line x1="20" y1="20" x2="15.5" y2="15.5"/>
@@ -96,7 +96,7 @@
     @if (estado != EstadoBusqueda.Inicial)
     {
         <section class="card-rju mt-6 p-0">
-            <header class="px-8 py-5 border-b border-regla-fina flex items-baseline justify-between">
+            <header class="px-5 sm:px-8 py-5 border-b border-regla-fina flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                 <div>
                     <div class="eyebrow eyebrow--accent">Resultados</div>
                     <h3 class="mt-1 font-display text-[24px] font-semibold text-tinta m-0">
@@ -107,7 +107,8 @@
 
             @if (estado == EstadoBusqueda.ConResultados)
             {
-                <table class="tabla-rju">
+                <div class="overflow-x-auto">
+                <table class="tabla-rju min-w-[860px]">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -131,7 +132,7 @@
                                 </td>
                                 <td class="t-right num mono">@fila.NumDocumento</td>
                                 <td class="t-right num text-tinta-suave">@(string.IsNullOrEmpty(fila.Fallecimiento) ? "—" : fila.Fallecimiento)</td>
-                                <td class="t-right" style="padding-right: 24px;">
+                                <td class="t-right pr-5 sm:pr-6">
                                     <button type="button" @onclick="() => Seleccionar(fila)"
                                             class="link-ver"
                                             disabled="@(estadoVisor == EstadoVisor.Cargando)">
@@ -145,12 +146,13 @@
                         }
                     </tbody>
                 </table>
+                </div>
             }
 
             @* Estados sin tabla — cargando / sin resultados / error *@
             @if (estado == EstadoBusqueda.Cargando)
             {
-                <div class="px-8 py-16 text-center">
+                <div class="px-5 sm:px-8 py-14 sm:py-16 text-center">
                     <svg viewBox="0 0 40 40" width="40" height="40" class="spinner-rju mx-auto mb-3">
                         <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-opacity="0.18" stroke-width="2.4" />
                         <path d="M20 4 a16 16 0 0 1 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
@@ -161,7 +163,7 @@
             }
             else if (estado == EstadoBusqueda.SinResultados)
             {
-                <div class="px-8 py-16 text-center">
+                <div class="px-5 sm:px-8 py-14 sm:py-16 text-center">
                     <div class="mx-auto mb-3 w-14 h-14 rounded-full bg-azul-tinte text-marca-azul flex items-center justify-center">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                             <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/>
@@ -175,7 +177,7 @@
             }
             else if (estado == EstadoBusqueda.Error)
             {
-                <div class="px-8 py-16 text-center">
+                <div class="px-5 sm:px-8 py-14 sm:py-16 text-center">
                     <div class="mx-auto mb-3 w-14 h-14 rounded-full bg-vino-tinte text-vino flex items-center justify-center">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                             <path d="M12 3 2 21h20z"/><line x1="12" y1="10" x2="12" y2="14"/><circle cx="12" cy="17.5" r="0.6" fill="currentColor"/>
@@ -193,14 +195,13 @@
     @* ── Visor de oficio (modal con sidebar de thumbnails) ────────────────── *@
     @if (estadoVisor != EstadoVisor.Oculto)
     {
-        <div class="visor-modal fixed inset-0 z-50 flex items-start justify-center bg-[rgba(20,18,14,0.55)] p-6 pt-14"
+        <div class="visor-modal fixed inset-0 z-50 flex items-start justify-center bg-[rgba(20,18,14,0.55)] p-3 pt-4 sm:p-6 sm:pt-14"
              @onclick="CerrarVisor">
-            <div class="bg-white rounded-md shadow-[0_30px_80px_rgba(20,18,14,0.4)] w-full max-w-[980px] grid grid-rows-[auto_1fr] overflow-hidden max-h-[calc(100vh-100px)]"
-                 style="grid-template-columns: 300px 1fr;"
+            <div class="bg-white rounded-md shadow-[0_30px_80px_rgba(20,18,14,0.4)] w-full max-w-[980px] grid grid-cols-1 lg:grid-cols-[300px_1fr] grid-rows-[auto_auto_1fr] lg:grid-rows-[auto_1fr] overflow-hidden max-h-[calc(100svh-32px)] sm:max-h-[calc(100vh-100px)]"
                  @onclick:stopPropagation="true">
 
                 @* Header (atraviesa las dos columnas) *@
-                <header class="col-span-2 px-7 py-4 border-b border-regla-fina bg-papel-suave grid grid-cols-[1fr_auto] gap-5">
+                <header class="lg:col-span-2 px-4 sm:px-7 py-4 border-b border-regla-fina bg-papel-suave grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4 sm:gap-5">
                     <div>
                         <div class="eyebrow eyebrow--accent">Oficio · Sucesión</div>
                         <div class="mt-1 font-display text-[22px] font-semibold text-tinta">
@@ -218,12 +219,12 @@
                             }
                         </div>
                     </div>
-                    <div class="flex gap-2 items-center">
+                    <div class="grid grid-cols-[1fr_auto] gap-2 items-center sm:flex sm:flex-wrap sm:justify-end">
                         @if (estadoVisor == EstadoVisor.Listo)
                         {
                             <a href="@($"/oficio/{searchId}/pdf")" download="@nombreArchivoPdf"
                                target="_blank" rel="noopener"
-                               class="btn-primario">
+                               class="btn-primario w-full sm:w-auto justify-center">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                                     <path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/>
                                 </svg>
@@ -232,7 +233,7 @@
                         }
                         <button type="button" @onclick="CerrarVisor"
                                 aria-label="Cerrar"
-                                class="ml-1 w-9 h-9 bg-white border border-regla rounded-md cursor-pointer text-tinta-suave flex items-center justify-center hover:bg-papel-suave">
+                                class="w-9 h-9 bg-white border border-regla rounded-md cursor-pointer text-tinta-suave flex items-center justify-center hover:bg-papel-suave">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
                                 <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
                             </svg>
@@ -241,16 +242,16 @@
                 </header>
 
                 @* Sidebar de thumbnails *@
-                <aside class="p-4 border-r border-regla-fina bg-papel-tarjeta overflow-auto">
+                <aside class="p-3 sm:p-4 border-b lg:border-b-0 lg:border-r border-regla-fina bg-papel-tarjeta overflow-auto max-h-[170px] lg:max-h-none">
                     @if (estadoVisor == EstadoVisor.Listo)
                     {
                         <div class="eyebrow mb-2.5">@cantidadPaginas @(cantidadPaginas == 1 ? "página" : "páginas")</div>
-                        <div class="flex flex-col gap-2.5">
+                        <div class="flex gap-2.5 overflow-x-auto lg:flex-col lg:overflow-x-visible">
                             @for (var i = 0; i < cantidadPaginas; i++)
                             {
                                 var pagina = i;
                                 <button type="button"
-                                        class="@($"text-left p-2 bg-white rounded-sm cursor-pointer flex items-center gap-2 {(pagina == paginaActiva ? "border-2 border-marca-azul" : "border border-regla-suave")}")"
+                                        class="@($"text-left p-2 bg-white rounded-sm cursor-pointer flex items-center gap-2 shrink-0 w-[170px] lg:w-auto {(pagina == paginaActiva ? "border-2 border-marca-azul" : "border border-regla-suave")}")"
                                         @onclick="() => paginaActiva = pagina">
                                     @* mini-thumb del documento *@
                                     <div class="w-[42px] h-[56px] bg-papel-tarjeta border border-regla-suave flex flex-col p-1 gap-0.5 shrink-0">
@@ -276,7 +277,7 @@
                 </aside>
 
                 @* Canvas — todas las páginas apiladas (UX igual que SCBA: scroll) *@
-                <main class="p-8 bg-papel-hondo overflow-auto">
+                <main class="p-3 sm:p-5 lg:p-8 bg-papel-hondo overflow-auto">
                     @switch (estadoVisor)
                     {
                         case EstadoVisor.Cargando:

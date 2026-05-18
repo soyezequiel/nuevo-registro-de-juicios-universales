@@ -40,8 +40,8 @@
 
         @* Hairline + meta bar (breadcrumb + fecha) *@
         <div class="border-b border-regla-suave bg-papel-suave">
-            <div class="mx-auto max-w-[1120px] px-8 py-2.5 flex items-baseline justify-between text-[12.5px] text-tinta-tenue">
-                <nav class="flex items-baseline gap-2.5" aria-label="Breadcrumb">
+            <div class="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between text-[12.5px] text-tinta-tenue">
+                <nav class="flex flex-wrap items-baseline gap-2.5" aria-label="Breadcrumb">
                     <a asp-area="" asp-page="/Index"
                        class="eyebrow hover:text-tinta-suave">Inicio</a>
                     <span class="text-tinta-fina">›</span>
@@ -49,7 +49,7 @@
                     <span class="text-tinta-fina">›</span>
                     <span class="eyebrow font-semibold text-tinta-suave">Sucesiones</span>
                 </nav>
-                <div class="flex items-baseline gap-5">
+                <div class="flex flex-wrap items-baseline gap-x-5 gap-y-1">
                     <a asp-area="" asp-page="/Privacy" class="eyebrow hover:text-tinta-suave">Privacidad</a>
                     <span class="eyebrow">@DateTime.Now.ToString("d 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("es-AR"))</span>
                 </div>
@@ -57,12 +57,12 @@
         </div>
     </header>
 
-    <main class="mx-auto max-w-[1120px] px-8 py-12">
+    <main class="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
         @RenderBody()
     </main>
 
     <footer class="mt-16 border-t border-regla bg-papel-hondo">
-        <div class="mx-auto max-w-[1120px] px-8 py-6 grid grid-cols-[auto_1fr_auto] gap-6 items-center">
+        <div class="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 sm:grid-cols-[auto_1fr] lg:grid-cols-[auto_1fr_auto] gap-4 sm:gap-6 items-start sm:items-center">
             <div class="text-tinta-tenue">
                 @* Pequeño marca-shield tipográfico — § §  *@
                 <span class="font-display text-2xl text-tinta-fina">§</span>
@@ -71,7 +71,7 @@
                 <div class="eyebrow text-tinta-suave">Suprema Corte de Justicia · provincia de Buenos Aires</div>
                 <div class="mt-0.5">Calle 13 e/ 47 y 48 · La Plata · República Argentina</div>
             </div>
-            <div class="flex gap-6 items-baseline text-[12px] text-tinta-tenue">
+            <div class="flex flex-wrap gap-x-6 gap-y-2 items-baseline text-[12px] text-tinta-tenue sm:col-span-2 lg:col-span-1">
                 <a class="hover:text-tinta-suave" href="https://github.com/soyezequiel" target="_blank" rel="noopener">GitHub</a>
                 <a class="hover:text-tinta-suave" href="https://www.linkedin.com/in/ezequiel-alcayaga/" target="_blank" rel="noopener">LinkedIn</a>
                 <a class="hover:text-tinta-suave" asp-area="" asp-page="/Privacy">Privacidad</a>
