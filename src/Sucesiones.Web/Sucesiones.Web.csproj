@@ -19,7 +19,25 @@
     <TailwindSalida>$(MSBuildThisFileDirectory)wwwroot\css\salida.css</TailwindSalida>
   </PropertyGroup>
 
-  <Target Name="TailwindBuild" BeforeTargets="Build">
+  <!-- salida.css lo genera Tailwind durante el build. El glob por defecto del
+       Web SDK (wwwroot/**) es wildcard: se expande en la fase de EVALUACION y
+       solo agarra archivos que ya existen. En un checkout limpio (Docker / cada
+       deploy de Render) salida.css aun no existe ahi, asi que nunca entraba a
+       @(Content) -> no se registraba en el endpoints manifest de .NET 9 ->
+       MapStaticAssets daba 404 y la pagina salia sin estilos.
+       Un Include LITERAL (sin comodines) crea el item aunque el archivo no
+       exista todavia en la evaluacion. El Remove previo evita el item duplicado
+       en builds incrementales, donde el glob wildcard si lo agarra. -->
+  <ItemGroup>
+    <Content Remove="wwwroot\css\salida.css" />
+    <Content Include="wwwroot\css\salida.css" />
+  </ItemGroup>
+
+  <!-- Debe correr antes de ResolveProjectStaticWebAssets: ese target ejecuta la
+       tarea DefineStaticWebAssets, que abre salida.css en disco para hashearlo.
+       Si Tailwind no lo genero todavia, falla con "No file exists for the asset".
+       Build queda en la lista para que el CSS tambien se regenere en `dotnet build`. -->
+  <Target Name="TailwindBuild" BeforeTargets="ResolveProjectStaticWebAssets;Build">
     <Error Condition="!Exists('$(TailwindBinario)')" Text="Falta $(TailwindBinario). Bajar el binario standalone de Tailwind — instrucciones en tools/README.md." />
     <Message Importance="high" Text="Compilando Tailwind: $(TailwindEntrada) -&gt; $(TailwindSalida)" />
     <!-- Los paths van entre &quot; porque la ruta del repo tiene espacios; sin comillas el shell rompe argumentos. -->

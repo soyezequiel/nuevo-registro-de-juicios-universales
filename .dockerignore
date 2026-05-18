@@ -1,0 +1,23 @@
+# Que NO entra al contexto de build de Docker. Sin esto, COPY . . se llevaria
+# .git, bin/, obj/ y demas: build lento y capas innecesarias.
+
+.git/
+.github/
+.vs/
+.idea/
+.vscode/
+
+# Output de .NET: se regenera dentro del contenedor.
+**/bin/
+**/obj/
+publish/
+
+# Binario Windows de Tailwind: en Docker usamos el Linux (ver Dockerfile).
+tools/*.exe
+
+# CSS generado: lo recompila el target TailwindBuild adentro del contenedor.
+src/Sucesiones.Web/wwwroot/css/salida.css
+
+*.log
+*.tmp
+*.user
