@@ -149,10 +149,24 @@ compartido). `SeleccionParser` saca `nocache` + páginas del `UpdatePanel2`
 El visor es un modal Blazor que muestra la página 0 (cache-bust por token
 en la URL del `<img>` para que cambie al seleccionar otra fila).
 
-#### Slice 5b — Visor multi-página
+#### Slice 5b — Visor multi-página + descarga PDF *(cerrada 2026-05-18)*
 
-Navegación entre páginas en el modal (el parser de 5a ya extrae todas las
-páginas; falta solo la UI de navegación).
+Todas las páginas del oficio apiladas en el modal (una `<figure>` por
+página, como hace SCBA; el modal scrollea). Botón **Descargar PDF**: endpoint
+`GET /oficio/{searchId}/pdf` baja todas las páginas por la sesión (corta
+cuando `ObtenerPaginaAsync` da `null`) y arma un PDF con una imagen por hoja
+usando **PDFsharp**. El nombre del archivo
+(`ConsultaRJU_APELLIDO_NOMBRE_DOC.pdf`) lo pone el atributo `download` del
+link (lado cliente), no el server, para no mandar datos del causante en la
+URL/headers.
+
+**Deuda anotada:**
+- SCBA rotula las imágenes como `text/html` aunque son JPEG. El proxy
+  `/oficio/.../pagina/N` reenvía ese content-type; el visor funciona porque
+  el navegador olfatea el JPEG. Lo correcto sería que el proxy mande
+  `image/jpeg`. Cosmético, no bloquea.
+- Modo fake: el placeholder es SVG y PDFsharp no lo incrusta → la descarga
+  devuelve 415 con mensaje claro. La descarga real (JPEG de SCBA) sí anda.
 
 ### Slice 6 — Manejo de "demasiados resultados" + auditoría
 
@@ -186,6 +200,8 @@ Detectar el mensaje de demasiados resultados y mostrar un estado visual claro pi
 | Body urlencoded armado a mano | Control exacto sobre nombres/valores de los campos del handoff y garantizar que `__VIEWSTATE` viaje URL-encoded (mandarlo crudo da error interno AJAX aunque el HTTP responda 200). |
 | Sesión aislada por búsqueda (slice 5a) | `imagegen.aspx` y `Select$N` dependen de la sesión donde se buscó. Un almacén singleton con HttpClient+cookies propios por `searchId` lo garantiza y resuelve la deuda del handler compartido de slice 4. En memoria y un solo proceso: alcanza para el MVP. |
 | Cache-bust en la URL del visor | El navegador reusaba la primera imagen porque la URL `/oficio/{id}/pagina/0` no cambiaba entre filas. Un token por selección la hace única y fuerza el re-fetch (mismo principio que el `nocache` de SCBA). |
+| PDFsharp para la descarga (slice 5b) | Única dependencia nueva. MIT, liviana, sin nativos. Solo se necesita "una imagen por hoja"; no hace falta motor de layout (QuestPDF era de más). |
+| Nombre del PDF lo pone el atributo `download`, no el server | El nombre lleva apellido/nombre/doc del causante (dato sensible). Resolviéndolo en el cliente (mismo origen) no viaja en la URL ni en headers. El server no fija filename para no pisar el del `download`. |
 
 ## Riesgos abiertos (del handoff)
 

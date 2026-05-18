@@ -122,10 +122,20 @@
                  @onclick:stopPropagation="true">
                 <header class="flex items-center justify-between border-b border-marca-azul/10 px-6 py-4">
                     <h3 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Oficio</h3>
-                    <button type="button" @onclick="CerrarVisor"
-                            class="rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm hover:bg-neutral-50">
-                        Cerrar
-                    </button>
+                    <div class="flex items-center gap-2">
+                        @if (estadoVisor == EstadoVisor.Listo)
+                        {
+                            <a href="@($"/oficio/{searchId}/pdf")" download="@nombreArchivoPdf"
+                               target="_blank" rel="noopener"
+                               class="rounded-md bg-marca-azul px-3 py-1 text-xs font-medium text-white shadow-sm hover:bg-marca-azul-claro">
+                                Descargar PDF
+                            </a>
+                        }
+                        <button type="button" @onclick="CerrarVisor"
+                                class="rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm hover:bg-neutral-50">
+                            Cerrar
+                        </button>
+                    </div>
                 </header>
 
                 <div class="overflow-auto bg-neutral-50 p-4">
@@ -142,15 +152,22 @@
                         case EstadoVisor.Listo:
                             @if (cantidadPaginas > 1)
                             {
-                                <p class="mb-3 text-xs text-neutral-500">
-                                    Documento de @cantidadPaginas páginas. Por ahora se muestra la página 1;
-                                    la navegación entre páginas llega en la próxima etapa.
-                                </p>
+                                <p class="mb-3 text-xs text-neutral-500">Documento de @cantidadPaginas páginas.</p>
                             }
-                            <div class="overflow-x-auto bg-white">
-                                <img src="@($"/oficio/{searchId}/pagina/0?v={visorToken}")" alt="Página 1 del oficio"
-                                     class="mx-auto block max-w-full" />
-                            </div>
+                            @for (var i = 0; i < cantidadPaginas; i++)
+                            {
+                                var pagina = i;
+                                <figure class="mb-4 last:mb-0">
+                                    <figcaption class="mb-1 text-xs font-medium text-neutral-500">
+                                        Página @(pagina + 1) de @cantidadPaginas
+                                    </figcaption>
+                                    <div class="overflow-x-auto bg-white">
+                                        <img src="@($"/oficio/{searchId}/pagina/{pagina}?v={visorToken}")"
+                                             alt="@($"Página {pagina + 1} del oficio")"
+                                             class="mx-auto block max-w-full" />
+                                    </div>
+                                </figure>
+                            }
                             break;
                     }
                 </div>
@@ -179,6 +196,11 @@
     // del navegador: sin esto, como searchId y pagina son iguales entre filas,
     // el browser reusa la primera imagen y nunca vuelve a pedir el oficio nuevo.
     private string visorToken = "";
+
+    // Nombre sugerido del PDF, armado con los datos de la fila elegida. Lo
+    // usa el atributo `download` del link (no el server) para no mandar datos
+    // del causante en la URL.
+    private string nombreArchivoPdf = "oficio.pdf";
 
     protected override void OnInitialized() => CargarCampos();
 
@@ -222,6 +244,7 @@
         {
             cantidadPaginas = r.CantidadPaginas;
             visorToken = Guid.NewGuid().ToString("N");
+            nombreArchivoPdf = ArmarNombreArchivo(fila);
             estadoVisor = EstadoVisor.Listo;
         }
         else
@@ -229,5 +252,14 @@
             mensajeVisor = r.Mensaje ?? "No se pudo abrir el oficio.";
             estadoVisor = EstadoVisor.Error;
         }
+    }
+
+    // ConsultaRJU_APELLIDO_NOMBRE_DOCUMENTO.pdf, con los caracteres inválidos
+    // de nombre de archivo (\ / : * ? " < > |) reemplazados por "_".
+    private static string ArmarNombreArchivo(ResultadoSucesion fila)
+    {
+        var crudo = $"ConsultaRJU_{fila.Apellido}_{fila.Nombre}_{fila.NumDocumento}.pdf";
+        var invalidos = System.IO.Path.GetInvalidFileNameChars();
+        return new string(crudo.Select(c => invalidos.Contains(c) ? '_' : c).ToArray());
     }
 }
