@@ -1,0 +1,120 @@
+1|#||4|9842|updatePanel|UpdatePanel1|
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table class="pegada">
+                                            <tr>
+                                                <td class="fondomedio">
+                                                    <p class="left">
+                                                        <span id="lblTituloResultado" style="color:Black;font-weight:bold;Color:Black;">Resultados obtenidos</span></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="DivConsulta" style="width: auto; z-index: 1; top: 400px;
+                            margin-bottom: 0px; overflow: auto; bottom: auto">
+
+
+                                        <div>
+	<table cellspacing="0" rules="all" border="1" id="GridConsulta" style="font-family:Arial;font-size:11pt;border-collapse:collapse;">
+		<tr class="juba" style="font-weight:bold;">
+			<th scope="col">Ver</th><th scope="col">a&#241;o</th><th scope="col">num_oficio</th><th scope="col">apellido</th><th scope="col">nombre</th><th scope="col">num_documento</th><th scope="col">fallecimiento</th>
+		</tr><tr style="background-color:#A1DCF2;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$0&#39;);return false;" style="border-width:0px;" /></td><td>2008</td><td>1792</td><td>AGUAYO ALCAYAGA</td><td>DINA ISABEL</td><td>93507145</td><td>26/06/2006</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$1&#39;);return false;" style="border-width:0px;" /></td><td>1986</td><td>27336</td><td>ALCAYAGA</td><td>ANA MARIA NORBERTA</td><td>263631</td><td>04/09/1986</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$2&#39;);return false;" style="border-width:0px;" /></td><td>1997</td><td>3473</td><td>ALCAYAGA</td><td>YOLANDA DEL CARMEN</td><td>948609</td><td>24/06/1994</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$3&#39;);return false;" style="border-width:0px;" /></td><td>2003</td><td>18148</td><td>ALCAYAGA</td><td>MARTA ROSA</td><td>2922192</td><td>02/11/1998</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$4&#39;);return false;" style="border-width:0px;" /></td><td>2003</td><td>25046</td><td>ALCAYAGA</td><td>JUAN BAUTISTA</td><td>3143536</td><td>30/10/2002</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$5&#39;);return false;" style="border-width:0px;" /></td><td>2004</td><td>12675</td><td>ALCAYAGA</td><td>LUIS MARIA</td><td>4899076</td><td>27/06/2003</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$6&#39;);return false;" style="border-width:0px;" /></td><td>1986</td><td>26420</td><td>ALCAYAGA</td><td>GABINO LUIS GREGORIO</td><td>4784657</td><td>19/02/1986</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$7&#39;);return false;" style="border-width:0px;" /></td><td>1970</td><td>6619</td><td>ALCAYAGA</td><td>IGNACIO GABINO</td><td>738953</td><td>18/05/1969</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$8&#39;);return false;" style="border-width:0px;" /></td><td>1987</td><td>19162</td><td>ALCAYAGA</td><td>IRMA ISABEL</td><td>403865</td><td>13/02/1981</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$9&#39;);return false;" style="border-width:0px;" /></td><td>1977</td><td>14197</td><td>ALCAYAGA</td><td>FRANCISCO EMILIO</td><td>769707</td><td>09/04/1976</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$10&#39;);return false;" style="border-width:0px;" /></td><td>1979</td><td>19274</td><td>ALCAYAGA</td><td>GABINO RAMON</td><td>0</td><td>03/09/1978</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$11&#39;);return false;" style="border-width:0px;" /></td><td>1979</td><td>38725</td><td>ALCAYAGA</td><td>HECTOR LUIS</td><td>0</td><td>08/01/1979</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$12&#39;);return false;" style="border-width:0px;" /></td><td>1993</td><td>36567</td><td>ALCAYAGA</td><td>DELIA CATALINA</td><td>2146701</td><td>16/08/1992</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$13&#39;);return false;" style="border-width:0px;" /></td><td>1988</td><td>20993</td><td>ALCAYAGA</td><td>MARIA ELENA</td><td>439015</td><td>25/06/1988</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$14&#39;);return false;" style="border-width:0px;" /></td><td>2011</td><td>29943</td><td>ALCAYAGA</td><td>HUGO IGNACIOO</td><td>10357312</td><td>25/08/2010</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$15&#39;);return false;" style="border-width:0px;" /></td><td>2014</td><td>88</td><td>alcayaga</td><td>leopoldo bernabe</td><td>165062</td><td>04/07/1996</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$16&#39;);return false;" style="border-width:0px;" /></td><td>2016</td><td>0</td><td>ALCAYAGA</td><td>DANIEL ERNESTO</td><td>7661165</td><td>11/10/2016</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$17&#39;);return false;" style="border-width:0px;" /></td><td>2020</td><td>0</td><td>ALCAYAGA</td><td>DOLLY BEATRIZ</td><td>2140551</td><td>01/06/2000</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$18&#39;);return false;" style="border-width:0px;" /></td><td>2025</td><td>0</td><td>ALCAYAGA</td><td>JORGE LUIS</td><td>13020998</td><td>25/12/2024</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$19&#39;);return false;" style="border-width:0px;" /></td><td>1976</td><td>37556</td><td>BAUCHIERO DE ALCAYAGA</td><td>ELENA</td><td>3398136</td><td>05/12/1975</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$20&#39;);return false;" style="border-width:0px;" /></td><td>1991</td><td>26500</td><td>NU&#209;EZ ALCAYAGA</td><td>SOFANOR ANTONIO</td><td>92176598</td><td>08/07/1944</td>
+		</tr><tr style="background-color:#D9DADB;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$21&#39;);return false;" style="border-width:0px;" /></td><td>2023</td><td>0</td><td>NU&#209;EZ ALCAYAGA</td><td>ELIANA</td><td>92459414</td><td>07/05/2019</td>
+		</tr><tr style="background-color:#FFFFFF;">
+			<td align="center"><input type="image" src="./Images/Lupa.png" alt="Ver oficio" onclick="javascript:__doPostBack(&#39;GridConsulta&#39;,&#39;Select$22&#39;);return false;" style="border-width:0px;" /></td><td>1977</td><td>26438</td><td>PENRU ALCAYAGA</td><td>LUIS HUMBERTO</td><td>0</td><td>21/05/1962</td>
+		</tr>
+	</table>
+</div>
+
+                        </div>
+                    |2326|updatePanel|UpdatePanel2|
+
+                        </p>
+
+                        <table id="tablaImg">
+	<tr>
+		<td>
+
+                                    <div id="Div1" class="white_content_main">
+
+                            <table class="contenido">
+                                <tr>
+                                    <td>
+
+                                        <a href="javascript:void(0)" onclick="document.getElementById('Div1').style.display='none';document.getElementById('fade').style.display='none'">
+
+                                                <img style="float: right; margin-top: 1px; margin-right: 4px;" border="0" src="./Images/atras.png"
+                                                    alt="Volver" />
+                                        </a>
+                                        <a href="javascript:Descargar()" onclick="document.getElementById('Div1').style.display='none';document.getElementById('fade').style.display='none'">
+
+                                                <img style="float: right; margin-top: 1px; margin-right: 4px;" border="0" src="./Images/descargar.png"
+                                                    alt="Descargar" />
+                                        </a>
+
+                                        <p class="titportada2">
+                                            Registro de Juicios Universales</p>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                                    <div id="Div2" class="white_content">
+
+                                        <br /><br />
+
+                                    <img src="imagegen.aspx?pagina=0&nocache=639146528298899340" id="image0" Width="98%" Height="250%" /><img src="imagenpaginagen.aspx?pagina=1 de 2&nocache=639146528298899340" id="imagePage0" Width="70%" Height="7%" /><img src="imagegen.aspx?pagina=1&nocache=639146528298899340" id="image1" Width="98%" Height="250%" /><img src="imagenpaginagen.aspx?pagina=2 de 2&nocache=639146528298899340" id="imagePage1" Width="70%" Height="7%" /></div>
+                                    </div>
+                                </td>
+	</tr>
+</table>
+
+                    |0|hiddenField|__EVENTTARGET||0|hiddenField|__EVENTARGUMENT||0|hiddenField|__LASTFOCUS||8068|hiddenField|__VIEWSTATE|/wEPDwUKMTk2Mzk0OTM0OA8WAh4NY29udHJvbHNhZGRlZGcWAgIBD2QWBgIHDxAPFgYeDURhdGFUZXh0RmllbGQFBm5vbWJyZR4ORGF0YVZhbHVlRmllbGQFDGlkYXBsaWNhY2lvbh4LXyFEYXRhQm91bmRnZBAVBw1TZWxlY2Npb25lLi4uClN1Y2VzaW9uZXMRRmljaGFzX1N1Y2VzaW9uZXMNQ0MgU1VDRVNJT05FUwhRdWllYnJhcw9GaWNoYXNfUXVpZWJyYXMLQ0MgUXVpZWJyYXMVBwABMQEyATgCMTECMTICMTUUKwMHZ2dnZ2dnZxYBAgFkAhMPZBYCZg9kFgQCAQ8PFgYeCUZvbnRfQm9sZGceBFRleHQFFFJlc3VsdGFkb3Mgb2J0ZW5pZG9zHgRfIVNCAoAQFgIeBXN0eWxlBQxDb2xvcjpCbGFjaztkAgMPPCsAEQMADxYGHwNnHgtfIUl0ZW1Db3VudAIXHgdWaXNpYmxlZ2QBEBYAFgAWAAwUKwAIFggeBE5hbWUFBGHDsW8eCklzUmVhZE9ubHloHgRUeXBlGSsBHglEYXRhRmllbGQFBGHDsW8WCB8KBQpudW1fb2ZpY2lvHwtoHwwZKVlTeXN0ZW0uSW50NjQsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OR8NBQpudW1fb2ZpY2lvFggfCgUIYXBlbGxpZG8fC2gfDBkrAh8NBQhhcGVsbGlkbxYIHwoFBm5vbWJyZR8LaB8MGSsCHw0FBm5vbWJyZRYIHwoFDW51bV9kb2N1bWVudG8fC2gfDBkrAh8NBQ1udW1fZG9jdW1lbnRvFggfCgUNZmFsbGVjaW1pZW50bx8LaB8MGSsCHw0FDWZhbGxlY2ltaWVudG8WCB8KBQdhcmNoaXZvHwtoHwwZKwIfDQUHYXJjaGl2bxYIHwoFAmlkHwtoHwwZKwEfDQUCaWQWAmYPZBYyZg9kFgQCBw8PFgIfCWhkZAIIDw8WAh8JaGRkAgEPDxYGHglCYWNrQ29sb3IJ8tyh/x4HVG9vbFRpcGUfBgIIZBYQAgEPDxYCHwUFBDIwMDhkZAICDw8WAh8FBQQxNzkyZGQCAw8PFgIfBQUPQUdVQVlP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b25zdWx0YSRjdGwwMiRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDAzJGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMDQkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwwNSRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDA2JGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMDckY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwwOCRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDA5JGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMTAkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwxMSRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDEyJGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMTMkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwxNCRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDE1JGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMTYkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwxNyRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDE4JGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMTkkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwyMCRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDIxJGN0bDAwBRhHcmlkQ29uc3VsdGEkY3RsMjIkY3RsMDAFGEdyaWRDb25zdWx0YSRjdGwyMyRjdGwwMAUYR3JpZENvbnN1bHRhJGN0bDI0JGN0bDAwBQxHcmlkQ29uc3VsdGEPPCsADAIDZggCAWRpcnZ1fUy7LyBV8uCYSDGAUzfXnKFv+WoPMJuE+OkJHA==|8|hiddenField|__VIEWSTATEGENERATOR|CA0B0334|24|asyncPostBackControlIDs||btnBuscar,,GridConsulta,|0|postBackControlIDs|||44|updatePanelIDs||tUpdatePanel3,,tUpdatePanel1,,tUpdatePanel2,|0|childUpdatePanelIDs|||27|panelsToRefreshIDs||UpdatePanel1,,UpdatePanel2,|2|asyncPostBackTimeout||90|2|formAction||./|32|pageTitle|| Registro de Juicios Universales|15|scriptStartupBlock|ScriptContentNoTags|MostrarImagen()|12|scriptStartupBlock|ScriptContentNoTags|posiciona(0)|192|scriptBlock|ScriptPath|/ScriptResource.axd?d=SIeg5Vbd8i5SxkN_mm-PKS9hRq8I16EurPEn4d-JEA3MeWyHs4PDZ6BfRCid7IrBph1asPntNDLlQhGk_t3slhG4azWB-G4btWjnyz0kpp6ey8I3cYIR8mpMUpJxSkjRgnhHd-STIVGPBN7LDIUL7w2&t=ffffffffc7a8e318|9|focus||btnBuscar|

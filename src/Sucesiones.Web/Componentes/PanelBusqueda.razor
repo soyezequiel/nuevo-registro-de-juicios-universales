@@ -98,9 +98,10 @@
                                     <td class="px-3 py-2 text-marca-negro">@fila.NumDocumento</td>
                                     <td class="px-3 py-2 text-marca-negro">@(string.IsNullOrEmpty(fila.Fallecimiento) ? "—" : fila.Fallecimiento)</td>
                                     <td class="px-3 py-2">
-                                        <button type="button" disabled
-                                                title="Ver oficio: disponible en una próxima etapa"
-                                                class="rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-600 shadow-sm disabled:cursor-not-allowed disabled:opacity-60">
+                                        <button type="button" @onclick="() => Seleccionar(fila)"
+                                                title="Ver oficio"
+                                                class="rounded-md border border-marca-azul bg-white px-3 py-1 text-xs font-medium text-marca-azul shadow-sm hover:bg-marca-azul hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                                                disabled="@(estadoVisor == EstadoVisor.Cargando)">
                                             Ver
                                         </button>
                                     </td>
@@ -112,12 +113,72 @@
             </table>
         </div>
     </div>
+
+    @if (estadoVisor != EstadoVisor.Oculto)
+    {
+        <div class="visor-modal fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+             @onclick="CerrarVisor">
+            <div class="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-lg bg-white shadow-xl"
+                 @onclick:stopPropagation="true">
+                <header class="flex items-center justify-between border-b border-marca-azul/10 px-6 py-4">
+                    <h3 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">Oficio</h3>
+                    <button type="button" @onclick="CerrarVisor"
+                            class="rounded-md border border-neutral-300 bg-white px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm hover:bg-neutral-50">
+                        Cerrar
+                    </button>
+                </header>
+
+                <div class="overflow-auto bg-neutral-50 p-4">
+                    @switch (estadoVisor)
+                    {
+                        case EstadoVisor.Cargando:
+                            <p class="py-12 text-center text-neutral-500">Abriendo el documento en SCBA…</p>
+                            break;
+
+                        case EstadoVisor.Error:
+                            <p class="py-12 text-center text-red-600">@mensajeVisor</p>
+                            break;
+
+                        case EstadoVisor.Listo:
+                            @if (cantidadPaginas > 1)
+                            {
+                                <p class="mb-3 text-xs text-neutral-500">
+                                    Documento de @cantidadPaginas páginas. Por ahora se muestra la página 1;
+                                    la navegación entre páginas llega en la próxima etapa.
+                                </p>
+                            }
+                            <div class="overflow-x-auto bg-white">
+                                <img src="@($"/oficio/{searchId}/pagina/0?v={visorToken}")" alt="Página 1 del oficio"
+                                     class="mx-auto block max-w-full" />
+                            </div>
+                            break;
+                    }
+                </div>
+            </div>
+        </div>
+    }
 </section>
 
 @code {
+    // Estado del visor de oficio. Es propio de la pantalla (no del backend),
+    // por eso vive acá y no en EstadoBusqueda/EstadoConsulta.
+    private enum EstadoVisor { Oculto, Cargando, Listo, Error }
+
     private Dictionary<string, string> valores = new();
     private EstadoBusqueda estado = EstadoBusqueda.Inicial;
     private IReadOnlyList<ResultadoSucesion> resultados = Array.Empty<ResultadoSucesion>();
+
+    // Ticket de la sesión SCBA de la última búsqueda: con esto el adapter
+    // retoma la misma conversación al seleccionar una fila.
+    private string searchId = "";
+    private EstadoVisor estadoVisor = EstadoVisor.Oculto;
+    private int cantidadPaginas;
+    private string mensajeVisor = "";
+
+    // Cambia en cada selección. Va en la URL del <img> para romper el caché
+    // del navegador: sin esto, como searchId y pagina son iguales entre filas,
+    // el browser reusa la primera imagen y nunca vuelve a pedir el oficio nuevo.
+    private string visorToken = "";
 
     protected override void OnInitialized() => CargarCampos();
 
@@ -129,15 +190,20 @@
         CargarCampos();
         estado = EstadoBusqueda.Inicial;
         resultados = Array.Empty<ResultadoSucesion>();
+        CerrarVisor();
     }
+
+    private void CerrarVisor() => estadoVisor = EstadoVisor.Oculto;
 
     private async Task Buscar()
     {
         estado = EstadoBusqueda.Cargando;
         resultados = Array.Empty<ResultadoSucesion>();
+        CerrarVisor();
 
         var respuesta = await Rju.BuscarAsync(valores);
         resultados = respuesta.Filas;
+        searchId = respuesta.SearchId;
         estado = respuesta.Estado switch
         {
             EstadoConsulta.ConResultados => EstadoBusqueda.ConResultados,
@@ -145,5 +211,23 @@
             // DemasiadosResultados tiene su propia pantalla en slice 6; por ahora cae en Error.
             _ => EstadoBusqueda.Error,
         };
+    }
+
+    private async Task Seleccionar(ResultadoSucesion fila)
+    {
+        estadoVisor = EstadoVisor.Cargando;
+
+        var r = await Rju.SeleccionarAsync(searchId, fila.Indice);
+        if (r.Ok)
+        {
+            cantidadPaginas = r.CantidadPaginas;
+            visorToken = Guid.NewGuid().ToString("N");
+            estadoVisor = EstadoVisor.Listo;
+        }
+        else
+        {
+            mensajeVisor = r.Mensaje ?? "No se pudo abrir el oficio.";
+            estadoVisor = EstadoVisor.Error;
+        }
     }
 }

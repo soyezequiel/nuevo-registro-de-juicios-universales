@@ -1,7 +1,7 @@
 # Plan del proyecto — Sucesiones (rediseño RJU)
 
 > Documento vivo. Se actualiza al cerrar cada rebanada o al cambiar una decisión.
-> Última actualización: 2026-05-17.
+> Última actualización: 2026-05-18.
 
 ## Contexto
 
@@ -132,7 +132,27 @@ Sacar la lógica del adapter a un proyecto separado `Sucesiones.Adapter`. Defini
 
 ### Slice 5 — Selección de fila + visor de páginas
 
-Postback `Select$N` para abrir un oficio. Endpoint propio que proxea `imagegen.aspx?pagina=N` manteniendo la sesión SCBA. Visor multi-página en el componente Blazor.
+> **Cambio de alcance (2026-05-18):** se partió en 5a y 5b por tamaño
+> (~13 archivos). Se consiguió una **captura real** de la respuesta del
+> `Select$N` (fixture `delta-seleccion.txt`), así que el parser de selección
+> quedó firme, no best-effort.
+
+#### Slice 5a — Selección + sesión + visor de la página 0 *(cerrada 2026-05-18)*
+
+Postback `Select$N` reusando la sesión de la búsqueda. Sesión aislada por
+búsqueda: `AlmacenSesionesRju` (singleton) guarda una `SesionRju` por
+`searchId` (HttpClient + cookies + último `__VIEWSTATE` + criterios + nocache),
+con vencimiento a 20 min. Esto resuelve la deuda de slice 4 (handler
+compartido). `SeleccionParser` saca `nocache` + páginas del `UpdatePanel2`
+(ignora los carteles `imagenpaginagen`). Endpoint propio
+`GET /oficio/{searchId}/pagina/{n}` proxea `imagegen.aspx` por la sesión.
+El visor es un modal Blazor que muestra la página 0 (cache-bust por token
+en la URL del `<img>` para que cambie al seleccionar otra fila).
+
+#### Slice 5b — Visor multi-página
+
+Navegación entre páginas en el modal (el parser de 5a ya extrae todas las
+páginas; falta solo la UI de navegación).
 
 ### Slice 6 — Manejo de "demasiados resultados" + auditoría
 
@@ -164,6 +184,8 @@ Detectar el mensaje de demasiados resultados y mostrar un estado visual claro pi
 | MVP solo Sucesiones (2026-05-17) | Acotar el alcance: el resto de los tipos de consulta del handoff (Quiebras, CC, Fichas) es deuda fuera del MVP. Se eliminó el dropdown y el código se redujo a Sucesiones. |
 | Toggle fake/real por config (`Rju:ModoReal`) | El fake no se borra al llegar el adapter real: sirve para desarrollo y demo sin depender de SCBA. Un solo interruptor en `appsettings.json` cambia la implementación en el DI sin tocar código. |
 | Body urlencoded armado a mano | Control exacto sobre nombres/valores de los campos del handoff y garantizar que `__VIEWSTATE` viaje URL-encoded (mandarlo crudo da error interno AJAX aunque el HTTP responda 200). |
+| Sesión aislada por búsqueda (slice 5a) | `imagegen.aspx` y `Select$N` dependen de la sesión donde se buscó. Un almacén singleton con HttpClient+cookies propios por `searchId` lo garantiza y resuelve la deuda del handler compartido de slice 4. En memoria y un solo proceso: alcanza para el MVP. |
+| Cache-bust en la URL del visor | El navegador reusaba la primera imagen porque la URL `/oficio/{id}/pagina/0` no cambiaba entre filas. Un token por selección la hace única y fuerza el re-fetch (mismo principio que el `nocache` de SCBA). |
 
 ## Riesgos abiertos (del handoff)
 

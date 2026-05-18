@@ -9,25 +9,14 @@ var opcionesRju = creadorApp.Configuration.GetSection("Rju").Get<OpcionesRju>() 
 
 if (opcionesRju.ModoReal)
 {
-    // HttpClient con "frasco de cookies": el GET inicial y el POST de
-    // búsqueda comparten sesión porque el handler guarda las cookies de
-    // SCBA entre ambos requests. Limitación conocida: IHttpClientFactory
-    // reusa el handler ~2 min, así que el frasco se comparte entre
-    // búsquedas. Alcanza para slice 4 (cada búsqueda pide su __VIEWSTATE
-    // fresco); la sesión aislada por búsqueda se ataca en slice 5.
-    creadorApp.Services.AddHttpClient<IClienteRju, ClienteRjuHttp>(cliente =>
-    {
-        cliente.BaseAddress = new Uri(opcionesRju.UrlBase);
-        cliente.DefaultRequestHeaders.Add("Origin", opcionesRju.UrlBase.TrimEnd('/'));
-        cliente.DefaultRequestHeaders.Referrer = new Uri(opcionesRju.UrlBase);
-        cliente.DefaultRequestHeaders.UserAgent.ParseAdd(
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Sucesiones-Adapter/1.0");
-    })
-    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-    {
-        UseCookies = true,
-        CookieContainer = new System.Net.CookieContainer(),
-    });
+    // Slice 5: cada búsqueda abre su PROPIA sesión SCBA (HttpClient + frasco
+    // de cookies propio) guardada en el almacén singleton por searchId. El
+    // Select$N y el endpoint de imagen la retoman por ese ticket. Esto
+    // reemplaza el handler compartido de slice 4 (que mezclaba cookies entre
+    // búsquedas: la deuda anotada). El almacén crea/dispone los HttpClient.
+    creadorApp.Services.AddSingleton(opcionesRju);
+    creadorApp.Services.AddSingleton<AlmacenSesionesRju>();
+    creadorApp.Services.AddScoped<IClienteRju, ClienteRjuHttp>();
 }
 else
 {
