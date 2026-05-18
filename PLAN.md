@@ -1,7 +1,7 @@
 # Plan del proyecto — Sucesiones (rediseño RJU)
 
 > Documento vivo. Se actualiza al cerrar cada rebanada o al cambiar una decisión.
-> Última actualización: 2026-05-16.
+> Última actualización: 2026-05-17.
 
 ## Contexto
 
@@ -121,9 +121,14 @@ Formulario fijo de Sucesiones (8 campos del handoff). Botón "Buscar" devuelve r
 
 Sacar la lógica del adapter a un proyecto separado `Sucesiones.Adapter`. Definir interfaz `IClienteRju` con implementación `ClienteRjuFake`. Crear proyecto `Sucesiones.Adapter.Tests` con xUnit. Tests unitarios sobre parser de AJAX delta y de `GridConsulta` usando fixtures HTML guardados.
 
-### Slice 4 — Adapter real contra SCBA
+### Slice 4 — Adapter real contra SCBA *(cerrada 2026-05-17)*
 
-Implementación `ClienteRjuHttp` con `HttpClient`, manejo de cookies, `__VIEWSTATE`, `__VIEWSTATEGENERATOR`, parseo con `HtmlAgilityPack`. Toggle por configuración entre fake y real.
+`ClienteRjuHttp` con `HttpClient`: GET inicial → lee `__VIEWSTATE`/`__VIEWSTATEGENERATOR` de los inputs ocultos → body `x-www-form-urlencoded` armado a mano → POST con headers AJAX → `AjaxDeltaParser` + `GridConsultaParser`. Cookies vía `HttpClientHandler.CookieContainer`. Toggle `Rju:ModoReal` en `appsettings.json` elige fake vs real en `Program.cs`. Errores de red/SCBA/timeout → `EstadoConsulta.Error`, sin fallback silencioso.
+
+**Fuera de Slice 4 (deuda anotada):**
+- Manejo de certificado digital del navegador (si SCBA lo exige, el modo real devuelve `Error`).
+- Sesión aislada por búsqueda: el `CookieContainer` se comparte entre búsquedas porque `IHttpClientFactory` reusa el handler ~2 min. Necesario resolverlo para `Select$N` en slice 5.
+- Tests del flujo HTTP (se decidió no agregarlos en este slice).
 
 ### Slice 5 — Selección de fila + visor de páginas
 
@@ -157,6 +162,8 @@ Detectar el mensaje de demasiados resultados y mostrar un estado visual claro pi
 | `docs/flujo-y-glosario.md` | Material de aprendizaje del flujo .NET/Blazor (analogía de restaurante + glosario). No es contrato del proyecto. |
 | Sin comentarios de aprendizaje en código | Se probó con tags `[BASE]/[BUSCAR]/...` y generaban ruido. Código auto-descriptivo en español; comentario solo para gotchas reales. |
 | MVP solo Sucesiones (2026-05-17) | Acotar el alcance: el resto de los tipos de consulta del handoff (Quiebras, CC, Fichas) es deuda fuera del MVP. Se eliminó el dropdown y el código se redujo a Sucesiones. |
+| Toggle fake/real por config (`Rju:ModoReal`) | El fake no se borra al llegar el adapter real: sirve para desarrollo y demo sin depender de SCBA. Un solo interruptor en `appsettings.json` cambia la implementación en el DI sin tocar código. |
+| Body urlencoded armado a mano | Control exacto sobre nombres/valores de los campos del handoff y garantizar que `__VIEWSTATE` viaje URL-encoded (mandarlo crudo da error interno AJAX aunque el HTTP responda 200). |
 
 ## Riesgos abiertos (del handoff)
 
