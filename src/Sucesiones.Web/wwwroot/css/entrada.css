@@ -202,40 +202,6 @@
   }
   .link-ver:disabled { opacity: 0.55; cursor: not-allowed; }
 
-  /* Chip — botones del header de la tabla (Orden, Exportar...) */
-  .chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #fff;
-    border: 1px solid var(--color-regla);
-    padding: 6px 12px;
-    font-family: var(--font-serif);
-    font-size: 13px;
-    color: var(--color-tinta-suave);
-    cursor: pointer;
-    border-radius: var(--radius);
-    transition: border-color 120ms ease, background 120ms ease;
-  }
-  .chip:hover { border-color: var(--color-tinta-tenue); }
-
-  /* Paginación */
-  .page-btn {
-    width: 28px; height: 28px;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: #fff;
-    border: 1px solid var(--color-regla-suave);
-    border-radius: var(--radius);
-    font-family: var(--font-serif);
-    font-size: 13px;
-    color: var(--color-tinta-suave);
-    cursor: pointer;
-  }
-  .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .page-btn--activo  {
-    background: var(--color-marca-azul);
-    color: var(--color-papel-tarjeta);
-    border-color: var(--color-marca-azul);
-  }
-
   /* Tabla institucional — header gris cálido + zebra */
   .tabla-rju {
     width: 100%;

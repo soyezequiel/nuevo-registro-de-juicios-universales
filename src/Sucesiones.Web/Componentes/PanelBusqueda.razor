@@ -6,7 +6,7 @@
     Mismo ADN serif que la propuesta A, pero más amigable y accesible:
       • Inputs en caja con borde tenue + focus ring suave
       • Formulario en tarjeta blanca con secciones (Principales / Variantes)
-      • Tabla con header gris cálido, zebra y paginación al pie
+      • Tabla con header gris cálido y zebra
       • "Ver oficio" como botón outline con icono ojo
       • Visor modal con sidebar de thumbnails de páginas
 
@@ -14,7 +14,7 @@
     intacta respecto del slice 5b. Solo cambia presentación.
 
     Las clases custom (.card-rju, .input-caja, .label-caja, .btn-primario,
-    .btn-ghost, .link-ver, .chip, .page-btn, .tabla-rju, .eyebrow,
+    .btn-ghost, .link-ver, .tabla-rju, .eyebrow,
     .spinner-rju) viven en wwwroot/css/entrada.css.
 *@
 
@@ -103,15 +103,6 @@
                         <span class="num-tab">@resultados.Count</span> @(resultados.Count == 1 ? "actuación" : "actuaciones")
                     </h3>
                 </div>
-                @if (estado == EstadoBusqueda.ConResultados)
-                {
-                    <div class="flex gap-2">
-                        <button type="button" class="chip">Año
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
-                        </button>
-                        <button type="button" class="chip">Exportar CSV</button>
-                    </div>
-                }
             </header>
 
             @if (estado == EstadoBusqueda.ConResultados)
@@ -154,19 +145,6 @@
                         }
                     </tbody>
                 </table>
-
-                <footer class="px-8 py-3.5 border-t border-regla-fina bg-papel-suave flex justify-between items-center text-[13px] text-tinta-tenue">
-                    <span>Mostrando 1–@resultados.Count de @resultados.Count</span>
-                    <div class="flex gap-1">
-                        <button type="button" class="page-btn" disabled>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="15 6 9 12 15 18"/></svg>
-                        </button>
-                        <button type="button" class="page-btn page-btn--activo">1</button>
-                        <button type="button" class="page-btn">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
-                        </button>
-                    </div>
-                </footer>
             }
 
             @* Estados sin tabla — cargando / sin resultados / error *@
