@@ -26,14 +26,14 @@ public class ClienteRjuFake : IClienteRju
     public async Task<ResultadoSeleccion> SeleccionarAsync(string searchId, int indice)
     {
         await Task.Delay(500);
-        // El oficio fake tiene 1 sola página (alcanza para probar el visor de 5a).
-        return new ResultadoSeleccion(true, 1);
+        // Dos páginas ficticias permiten probar el selector del visor en local.
+        return new ResultadoSeleccion(true, 2);
     }
 
     public async Task<PaginaOficio?> ObtenerPaginaAsync(string searchId, int pagina)
     {
         await Task.Delay(300);
-        if (pagina != 0) return null;
+        if (pagina is < 0 or > 1) return null;
 
         // SVG de relleno: se dibuja en un <img> sin imágenes binarias de por
         // medio. Deja claro a la vista que es modo fake, no un oficio real.
@@ -47,6 +47,7 @@ public class ClienteRjuFake : IClienteRju
               <text x="400" y="540" font-family="Arial" font-size="16" fill="#94a3b8" text-anchor="middle">Modo real (Rju:ModoReal=true) trae la imagen real de SCBA</text>
             </svg>
             """;
+        svg = svg.Replace("Página 0", $"Página {pagina + 1}");
         return new PaginaOficio(Encoding.UTF8.GetBytes(svg), "image/svg+xml");
     }
 }
